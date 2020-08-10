@@ -20,9 +20,7 @@ public class PracownikDAOImplementacja implements PracownikDAO {
         Session currentSession = entityManager.unwrap(Session.class);
         Query<PracownikSQL> query = currentSession.createQuery("from PracownikSQL",PracownikSQL.class);
         List<PracownikSQL> list = query.getResultList();
-        System.out.println("DAO_pezdan1");
         System.out.println(list);
-        System.out.println("DAO_pezdan2");
 
        /* JSONObject json = new JSONObject();
         json.put("login", login.getText());*/
@@ -33,12 +31,11 @@ public class PracownikDAOImplementacja implements PracownikDAO {
     @Override
     public String getLogowanie(PracownikSQL pracownikSQLaaa2) {
 
-        System.out.println("DAO_nic1");
         System.out.println(pracownikSQLaaa2);
         String login1 = pracownikSQLaaa2.getLogin();
-        System.out.println(login1); //zczytanie loginu z JSONA co przyszedl
+        System.out.println(login1); //odczyt loginu z JSONA co przyszedl
         String password1 = pracownikSQLaaa2.getPassword();
-        System.out.println(password1); //zczytanie hasla z JSONA co przyszedl
+        System.out.println(password1); //odczyt hasla z JSONA co przyszedl
 
         Session currentSession = entityManager.unwrap(Session.class);
         Query<PracownikSQL> query = currentSession.createQuery("from PracownikSQL " +
@@ -50,7 +47,6 @@ public class PracownikDAOImplementacja implements PracownikDAO {
         System.out.println("Status pracownika: " + list.toString().contains("status='pracownik'"));
         System.out.println("Status admina: " + list.toString().contains("status='admin'"));
 
-        System.out.println("DAO_nic2");
         if (list.isEmpty()){
             System.out.println("nieudane logowanie");
             return "zle";

@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table(name = "danelogowania") //pisac malymi bo jak: daneLogowania to hibernate robi dane_logowania
 public class PracownikSQL {
 
-    //pusty kontruktor do tez request
-    public PracownikSQL(){
+    //pusty kontruktor tez do request
+    public PracownikSQL() {
 
     }
 
@@ -17,19 +17,19 @@ public class PracownikSQL {
         this.password = password;
     }
 
-    @Column(name="id_employee")
+    @Column(name = "id_employee")
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String first_name;
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String last_name;
-    @Column(name="status")
+    @Column(name = "status")
     private String status;
-    @Column(name="login")
+    @Column(name = "login")
     private String login;
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
     public Integer getId() {
