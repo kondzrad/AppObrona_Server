@@ -1,10 +1,10 @@
-package pl.kawka.AppObronaServerTest5.controller;
+package pl.kawka.appobronaserver.controller;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.kawka.AppObronaServerTest5.model.PracownikSQL;
-import pl.kawka.AppObronaServerTest5.service.PracownikService;
+import pl.kawka.appobronaserver.model.PracownikSQL;
+import pl.kawka.appobronaserver.service.PracownikService;
 
 import java.util.List;
 

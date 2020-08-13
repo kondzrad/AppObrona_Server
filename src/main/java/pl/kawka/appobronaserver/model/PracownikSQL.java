@@ -1,4 +1,4 @@
-package pl.kawka.AppObronaServerTest5.model;
+package pl.kawka.appobronaserver.model;
 
 import javax.persistence.*;
 

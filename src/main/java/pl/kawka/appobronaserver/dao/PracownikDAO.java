@@ -1,6 +1,6 @@
-package pl.kawka.AppObronaServerTest5.dao;
+package pl.kawka.appobronaserver.dao;
 
-import pl.kawka.AppObronaServerTest5.model.PracownikSQL;
+import pl.kawka.appobronaserver.model.PracownikSQL;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package pl.kawka.AppObronaServerTest5.dao;
+package pl.kawka.appobronaserver.dao;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import pl.kawka.AppObronaServerTest5.model.PracownikSQL;
+import pl.kawka.appobronaserver.model.PracownikSQL;
 
 import javax.persistence.EntityManager;
 import java.util.List;
