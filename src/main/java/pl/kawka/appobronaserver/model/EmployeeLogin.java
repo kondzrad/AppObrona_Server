@@ -3,16 +3,16 @@ package pl.kawka.appobronaserver.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "danelogowania") //pisac malymi bo jak: daneLogowania to hibernate robi dane_logowania
-public class PracownikSQL {
+@Table(name = "employee_login") //pisac malymi bo jak: daneLogowania to hibernate robi dane_logowania
+public class EmployeeLogin {
 
     //pusty kontruktor tez do request
-    public PracownikSQL() {
+    public EmployeeLogin() {
 
     }
 
     //kontruktor do requestParameter
-    public PracownikSQL(String login, String password) {
+    public EmployeeLogin(String login, String password) {
         this.login = login;
         this.password = password;
     }
@@ -82,7 +82,7 @@ public class PracownikSQL {
 
     @Override
     public String toString() {
-        return "PracownikSQL{" +
+        return "EmployeeLogin{" +
                 "id=" + id +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
