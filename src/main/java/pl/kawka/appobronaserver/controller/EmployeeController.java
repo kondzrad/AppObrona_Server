@@ -15,16 +15,13 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/employee")
 public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
 
-    @Autowired
-    private CustomerService customerService;
-
-    @GetMapping("/employee")  //jak wysle jsona z log i haslo to da mi liste pracownikow
+    @GetMapping //jak wysle jsona z log i haslo to da mi liste pracownikow
     public List<EmployeeLogin> getPracownikSQL(@RequestBody JSONObject requestPara){
 
         //by nie bylo bledu musi byc konstruktor w EmployeeController
@@ -48,14 +45,5 @@ public class EmployeeController {
         return employeeService.getLogowanie(employeeLoginLogowanie);
     }
 
-    /*@GetMapping("/klienci")  //tez dziala
-    public ResponseEntity<List<Customer>> showLoginPage(){
-        List<Customer> list = customerService.getAllCustomerList();
-        return new ResponseEntity<List<Customer>>(list, HttpStatus.OK);
-    }*/
 
-    @GetMapping("/klienci")  //pobiera baze klientow
-    public List<Customer> getAllCustomers(){
-        return customerService.getAllCustomerList();
-    }
 }
