@@ -2,10 +2,16 @@ package pl.kawka.appobronaserver.controller;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.kawka.appobronaserver.model.Customer;
 import pl.kawka.appobronaserver.model.EmployeeLogin;
+import pl.kawka.appobronaserver.service.CustomerService;
 import pl.kawka.appobronaserver.service.EmployeeService;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -15,7 +21,10 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/employee")
+    @Autowired
+    private CustomerService customerService;
+
+    @GetMapping("/employee")  //jak wysle jsona z log i haslo to da mi liste pracownikow
     public List<EmployeeLogin> getPracownikSQL(@RequestBody JSONObject requestPara){
 
         //by nie bylo bledu musi byc konstruktor w EmployeeController
@@ -27,7 +36,7 @@ public class EmployeeController {
         return employeeService.getPracownikSQL();
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login")  //przyjecie json'ow do zalogowania
     public String logowanie(@RequestBody JSONObject requestPara){
 
         //by nie bylo bledu musi byc konstruktor w EmployeeController
@@ -39,4 +48,14 @@ public class EmployeeController {
         return employeeService.getLogowanie(employeeLoginLogowanie);
     }
 
+    /*@GetMapping("/klienci")  //tez dziala
+    public ResponseEntity<List<Customer>> showLoginPage(){
+        List<Customer> list = customerService.getAllCustomerList();
+        return new ResponseEntity<List<Customer>>(list, HttpStatus.OK);
+    }*/
+
+    @GetMapping("/klienci")  //pobiera baze klientow
+    public List<Customer> getAllCustomers(){
+        return customerService.getAllCustomerList();
+    }
 }
