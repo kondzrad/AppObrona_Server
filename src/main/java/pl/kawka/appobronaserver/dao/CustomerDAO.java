@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface CustomerDAO {
 
+    String postCustomerCreate(Customer customerCreate);
+
     public List<Customer> getAllCustomerList();
 
 }

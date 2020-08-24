@@ -4,15 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "employee_login") //pisac malymi bo jak: daneLogowania to hibernate robi dane_logowania
-public class EmployeeLogin {
+public class Employee {
 
     //pusty kontruktor tez do request
-    public EmployeeLogin() {
+    public Employee() {
 
     }
 
     //kontruktor do requestParameter
-    public EmployeeLogin(String login, String password) {
+    public Employee(String login, String password) {
         this.login = login;
         this.password = password;
     }
@@ -82,7 +82,7 @@ public class EmployeeLogin {
 
     @Override
     public String toString() {
-        return "EmployeeLogin{" +
+        return "Employee{" +
                 "id=" + id +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +

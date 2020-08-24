@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.kawka.appobronaserver.dao.EmployeeDAO;
-import pl.kawka.appobronaserver.model.EmployeeLogin;
+import pl.kawka.appobronaserver.model.Employee;
 
 import java.util.List;
 
@@ -16,13 +16,13 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
     @Transactional
     @Override
-    public List<EmployeeLogin> getPracownikSQL() {
+    public List<Employee> getPracownikSQL() {
         return employeeDAO.getPracownikSQL();
     }
 
     @Override
-    public String getLogowanie(EmployeeLogin employeeLoginLogowanie) {
-        return employeeDAO.getLogowanie(employeeLoginLogowanie);
+    public String getLogowanie(Employee employeeLogowanie) {
+        return employeeDAO.getLogowanie(employeeLogowanie);
     }
 
 }

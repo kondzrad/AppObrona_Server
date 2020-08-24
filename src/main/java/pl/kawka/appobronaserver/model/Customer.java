@@ -6,18 +6,32 @@ import javax.persistence.*;
 @Table(name = "customers")
 public class Customer {
 
-    // private TableColumn<Customer, String> id, firstName,
-    // lastName, town, street, postcode, telephoneNumber, nip, dateAdded;
+    public Customer() {
+    }
 
-// `id_customer` int not null auto_increment,
-//    `first_name` varchar(40) default null,
-//    `last_name` varchar(40) default null,
-//    `town` varchar(40) default null,
-//    `street` varchar(40) default null,
-//    `postcode` varchar(40) default null,
-//    `telephone_number` varchar(40) default null,
-//    `nip` varchar(40) default null,
-//    `date_added` DATETIME,
+    //kontruktor do requestParam
+    public Customer(Integer id, String firstName, String lastName, String town, String street, String postcode, String telephoneNumber, String nip, String dateAdded) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.town = town;
+        this.street = street;
+        this.postcode = postcode;
+        this.telephoneNumber = telephoneNumber;
+        this.nip = nip;
+        this.dateAdded = dateAdded;
+    }
+
+    //kontruktor bez ID i daty
+    public Customer(String firstName, String lastName, String town, String street, String postcode, String telephoneNumber, String nip) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.town = town;
+        this.street = street;
+        this.postcode = postcode;
+        this.telephoneNumber = telephoneNumber;
+        this.nip = nip;
+    }
 
     @Column(name = "id_customer")
     @Id

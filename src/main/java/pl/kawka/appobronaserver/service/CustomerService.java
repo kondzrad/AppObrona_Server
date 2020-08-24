@@ -8,4 +8,5 @@ public interface CustomerService {
 
     public List<Customer> getAllCustomerList();
 
+    String postCustomerCreate(Customer customerCreate);
 }

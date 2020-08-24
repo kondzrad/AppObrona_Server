@@ -1,12 +1,12 @@
 package pl.kawka.appobronaserver.dao;
 
-import pl.kawka.appobronaserver.model.EmployeeLogin;
+import pl.kawka.appobronaserver.model.Employee;
 
 import java.util.List;
 
 public interface EmployeeDAO {
 
-    List<EmployeeLogin> getPracownikSQL();
+    List<Employee> getPracownikSQL();
 
-    String getLogowanie(EmployeeLogin employeeLogin);
+    String getLogowanie(Employee employee);
 }

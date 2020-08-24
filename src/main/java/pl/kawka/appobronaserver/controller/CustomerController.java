@@ -1,9 +1,8 @@
 package pl.kawka.appobronaserver.controller;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.kawka.appobronaserver.model.Customer;
 import pl.kawka.appobronaserver.service.CustomerService;
 
@@ -25,6 +24,26 @@ public class CustomerController {
     @GetMapping //pobiera baze klientow
     public List<Customer> getAllCustomers(){
         return customerService.getAllCustomerList();
+    }
+
+    @PostMapping("/create")  //przyjecie json'ow do stworzenia clienta
+    public String tworzenie(@RequestBody JSONObject requestPara){
+
+        //by nie bylo bledu musi byc konstruktor w CustomerController - bez ID bo nie chcemy wyslac ID
+        Customer customerCreate = new Customer(
+                //Integer.parseInt(requestPara.get("id").toString()),
+                requestPara.get("firstName").toString(),
+                requestPara.get("lastName").toString(),
+                requestPara.get("town").toString(),
+                requestPara.get("street").toString(),
+                requestPara.get("postcode").toString(),
+                requestPara.get("telephoneNumber").toString(),
+                requestPara.get("nip").toString());
+                //requestPara.get("dateAdded").toString());
+        //przypisania danych z JSON do nowego klienta
+        System.out.println(customerCreate);
+
+        return customerService.postCustomerCreate(customerCreate);
     }
 
 }
