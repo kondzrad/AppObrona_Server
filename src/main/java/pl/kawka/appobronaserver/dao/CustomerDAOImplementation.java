@@ -5,17 +5,11 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pl.kawka.appobronaserver.model.Customer;
-import pl.kawka.appobronaserver.model.Employee;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class CustomerDAOImplementation implements CustomerDAO{
@@ -56,6 +50,8 @@ public class CustomerDAOImplementation implements CustomerDAO{
     }
 
 
+
+
     @Override
     public String postCustomerCreate(Customer customerCreate) {
 
@@ -94,6 +90,66 @@ public class CustomerDAOImplementation implements CustomerDAO{
         currentSession.close();
 
 
+        return null;
+    }
+
+    @Override
+    public List<Customer> postCustomerRead(Customer customerRead) {
+
+        System.out.println("Wchodze do wczytania klientow");
+
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        List<String> listaMoja= new ArrayList<>();
+        if (customerRead.getId()!=0){
+            listaMoja.add("id='"+customerRead.getId()+"'");
+        }
+        if (! customerRead.getFirstName().isEmpty()){
+            listaMoja.add("firstName='"+customerRead.getFirstName()+"'");
+        }
+        if (! customerRead.getLastName().equals("")){
+            listaMoja.add("lastName='"+customerRead.getLastName()+"'");
+        }
+        if (! customerRead.getTown().isEmpty()){
+            listaMoja.add("town='"+customerRead.getTown()+"'");
+        }
+        if (! customerRead.getStreet().equals("")){
+            listaMoja.add("street='"+customerRead.getStreet()+"'");
+        }
+        if (! customerRead.getPostcode().isEmpty()){
+            listaMoja.add("postcode='"+customerRead.getPostcode()+"'");
+        }
+        if (! customerRead.getTelephoneNumber().equals("")){
+            listaMoja.add("telephoneNumber='"+customerRead.getTelephoneNumber()+"'");
+        }
+        if (! customerRead.getNip().isEmpty()){
+            listaMoja.add("nip='"+customerRead.getNip()+"'");
+        }
+        //dodac obsluge daty
+
+        String stringKoncowy="";
+        for (int i = 0; i < listaMoja.size()-1; i++) {
+            stringKoncowy = stringKoncowy + listaMoja.get(i) + " and ";
+        }
+        stringKoncowy = stringKoncowy + listaMoja.get(listaMoja.size()-1);
+
+        System.out.println("Ilosc warunkow: " + listaMoja.size());
+        System.out.println(stringKoncowy);
+
+        Query<Customer> query = currentSession.createQuery("from Customer " + "WHERE " + stringKoncowy, Customer.class);
+        List<Customer> list = query.getResultList();
+
+        System.out.println("Lista klientow do wczytania :" + list);
+        System.out.println("Ilosc na liscie: " + list.size());
+
+        return list;
+    }
+
+
+    private String checkNull(String tekst){
+        if (tekst.equals("")){
+            return "";
+        }
         return null;
     }
 

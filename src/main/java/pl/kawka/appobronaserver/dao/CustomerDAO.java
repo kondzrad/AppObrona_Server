@@ -10,4 +10,5 @@ public interface CustomerDAO {
 
     public List<Customer> getAllCustomerList();
 
+    List<Customer> postCustomerRead(Customer customerRead);
 }

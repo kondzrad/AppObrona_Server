@@ -24,4 +24,9 @@ public class CustomerServiceImplementation implements CustomerService{
         return customerDAO.postCustomerCreate(customerCreate);
     }
 
+    @Override
+    public List<Customer> postCustomerRead(Customer customerRead) {
+        return customerDAO.postCustomerRead(customerRead);
+    }
+
 }
