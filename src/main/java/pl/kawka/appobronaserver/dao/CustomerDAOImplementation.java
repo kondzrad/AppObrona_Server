@@ -15,6 +15,7 @@ import java.util.*;
 public class CustomerDAOImplementation implements CustomerDAO{
 
 
+
    /* @Autowired
     private SessionFactory sessionFactory;
 
@@ -147,6 +148,41 @@ public class CustomerDAOImplementation implements CustomerDAO{
     }
 
     @Override
+    public String postCustomerUpdate(Customer customerUpdate) {
+
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(Calendar.getInstance().getTime());
+
+        Session currentSession = entityManager.unwrap(Session.class);
+        //Customer customer = new Customer();
+        System.out.println(customerUpdate.getFirstName());
+       // customer.setId(customerUpdate.getId());
+Integer numerIdDoUpdate = customerUpdate.getId(); //int na Integer bo tak mam w customer
+        System.out.println(numerIdDoUpdate);
+
+        Customer customer = currentSession.get(Customer.class, numerIdDoUpdate);
+
+        customer.setFirstName(customerUpdate.getFirstName());
+        customer.setLastName(customerUpdate.getLastName());
+        customer.setTown(customerUpdate.getTown());
+        customer.setStreet(customerUpdate.getStreet());
+        customer.setPostcode(customerUpdate.getPostcode());
+        customer.setTelephoneNumber(customerUpdate.getTelephoneNumber());
+        customer.setNip(customerUpdate.getNip());
+        customer.setDateAdded(timeStamp);
+        currentSession.beginTransaction();
+        //pobranie encji i przypisanie do nowej encji
+        //Employee employee = session.get(Employee.class, 9);
+       // currentSession.update(currentSession.merge(customerUpdate)); //merge musi byc bo: java.lang
+        currentSession.update(customer);
+        // .IllegalArgumentException: Removing a detached instance
+        currentSession.getTransaction().commit();
+        //zamkniecie obiektu SessionFactory
+        currentSession.close();
+        return null;
+    }
+
+
+    @Override
     public List<Customer> postCustomerDelete(Customer customerDelete) {
         Session currentSession = entityManager.unwrap(Session.class);
 
@@ -162,6 +198,7 @@ public class CustomerDAOImplementation implements CustomerDAO{
         currentSession.close();
         return null;
     }
+
 
 
     private String checkNull(String tekst){

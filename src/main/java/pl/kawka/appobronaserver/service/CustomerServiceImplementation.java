@@ -34,4 +34,9 @@ public class CustomerServiceImplementation implements CustomerService{
         return customerDAO.postCustomerDelete(customerDelete);
     }
 
+    @Override
+    public String postCustomerUpdate(Customer customerUpdate) {
+        return customerDAO.postCustomerUpdate(customerUpdate);
+    }
+
 }

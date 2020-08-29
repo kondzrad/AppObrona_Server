@@ -13,4 +13,6 @@ public interface CustomerDAO {
     List<Customer> postCustomerRead(Customer customerRead);
 
     List<Customer> postCustomerDelete(Customer customerDelete);
+
+    String postCustomerUpdate(Customer customerUpdate);
 }

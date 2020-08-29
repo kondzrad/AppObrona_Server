@@ -46,7 +46,7 @@ public class CustomerController {
         return customerService.postCustomerCreate(customerCreate);
     }
 
-    @PostMapping("/read")  //przyjecie json'ow do stworzenia clienta
+    @PostMapping("/read")  //przyjecie json'ow do wczytania clienta
     public List<Customer> wczytanie(@RequestBody JSONObject requestPara){
 
         //by nie bylo bledu musi byc konstruktor w CustomerController
@@ -66,6 +66,25 @@ public class CustomerController {
         return customerService.postCustomerRead(customerRead);
     }
 
+    @PostMapping("/update")  //przyjecie json'ow do stworzenia clienta
+    public String modyfikacja(@RequestBody JSONObject requestPara){
+
+        //by nie bylo bledu musi byc konstruktor w CustomerController - bez ID bo nie chcemy wyslac ID
+        Customer customerUpdate = new Customer(
+                Integer.parseInt(requestPara.get("id").toString()),
+                requestPara.get("firstName").toString(),
+                requestPara.get("lastName").toString(),
+                requestPara.get("town").toString(),
+                requestPara.get("street").toString(),
+                requestPara.get("postcode").toString(),
+                requestPara.get("telephoneNumber").toString(),
+                requestPara.get("nip").toString(),
+                requestPara.get("dateAdded").toString());
+        //przypisania danych z JSON do nowego klienta
+        System.out.println("Z controllera" + customerUpdate);
+
+        return customerService.postCustomerUpdate(customerUpdate);
+    }
 
     @PostMapping("/delete")  //przyjecie json'ow do stworzenia clienta
     public List<Customer> usuwanie(@RequestBody JSONObject requestPara){

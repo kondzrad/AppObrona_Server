@@ -59,8 +59,6 @@ public class Customer {
     private String dateAdded;
 
 
-
-
     public Integer getId() {
         return id;
     }
