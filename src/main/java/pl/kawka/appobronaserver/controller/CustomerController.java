@@ -41,7 +41,7 @@ public class CustomerController {
                 requestPara.get("nip").toString());
                 //requestPara.get("dateAdded").toString());
         //przypisania danych z JSON do nowego klienta
-        System.out.println(customerCreate);
+        System.out.println("Z controllera" + customerCreate);
 
         return customerService.postCustomerCreate(customerCreate);
     }
@@ -64,6 +64,20 @@ public class CustomerController {
         System.out.println(customerRead);
 
         return customerService.postCustomerRead(customerRead);
+    }
+
+
+    @PostMapping("/delete")  //przyjecie json'ow do stworzenia clienta
+    public List<Customer> usuwanie(@RequestBody JSONObject requestPara){
+
+        //by nie bylo bledu musi byc konstruktor w CustomerController
+        Customer customerDelete = new Customer(
+                Integer.parseInt(requestPara.get("id").toString())
+                );
+        //przypisania danych z JSON do nowego klienta
+        System.out.println("Controller usuwanie" + customerDelete);
+
+        return customerService.postCustomerDelete(customerDelete);
     }
 
 }

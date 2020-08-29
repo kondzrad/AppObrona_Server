@@ -11,4 +11,6 @@ public interface CustomerService {
     String postCustomerCreate(Customer customerCreate);
 
     List<Customer> postCustomerRead(Customer customerRead);
+
+    List<Customer> postCustomerDelete(Customer customerDelete);
 }

@@ -33,6 +33,10 @@ public class Customer {
         this.nip = nip;
     }
 
+    public Customer(int id) { //kontruktor do usuwania
+        this.id = id;
+    }
+
     @Column(name = "id_customer")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +57,8 @@ public class Customer {
     private String nip;
     @Column(name = "date_added")
     private String dateAdded;
+
+
 
 
     public Integer getId() {

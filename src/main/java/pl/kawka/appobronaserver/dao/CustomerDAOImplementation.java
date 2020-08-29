@@ -34,6 +34,7 @@ public class CustomerDAOImplementation implements CustomerDAO{
 
     @Override
     public List<Customer> getAllCustomerList() {
+        System.out.println("WCZYTANIE CALEJ BAZY");
         Session currentSession = entityManager.unwrap(Session.class);
         Query<Customer> query = currentSession.createQuery("from Customer", Customer.class);
         List<Customer> list = query.getResultList();
@@ -143,6 +144,23 @@ public class CustomerDAOImplementation implements CustomerDAO{
         System.out.println("Ilosc na liscie: " + list.size());
 
         return list;
+    }
+
+    @Override
+    public List<Customer> postCustomerDelete(Customer customerDelete) {
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Customer customer = new Customer();
+        System.out.println(customerDelete.getId());
+        customer.setId(customerDelete.getId());
+        currentSession.beginTransaction();
+        //pobranie encji i przypisanie do nowej encji
+        //Employee employee = session.get(Employee.class, 9);
+        currentSession.delete(currentSession.merge(customerDelete)); //merge musi byc bo: java.lang.IllegalArgumentException: Removing a detached instance
+        currentSession.getTransaction().commit();
+        //zamkniecie obiektu SessionFactory
+        currentSession.close();
+        return null;
     }
 
 
