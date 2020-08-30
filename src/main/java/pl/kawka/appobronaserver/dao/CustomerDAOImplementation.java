@@ -66,7 +66,8 @@ public class CustomerDAOImplementation implements CustomerDAO{
         //wiec mozna dodac wartosci ale tlyko z innej tabeli
 
 
-        String timeStamp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        //duze H daje 20 wieczor a nie 8pm
 
        // if (customerCreate.getFirstName().equals("")){}else{}
 
@@ -127,7 +128,9 @@ public class CustomerDAOImplementation implements CustomerDAO{
         if (! customerRead.getNip().isEmpty()){
             listaMoja.add("nip='"+customerRead.getNip()+"'");
         }
-        //dodac obsluge daty
+        if (! customerRead.getDateAdded().isEmpty()){
+            listaMoja.add("dateAdded='"+customerRead.getDateAdded()+"'");
+        }
 
         String stringKoncowy="";
         for (int i = 0; i < listaMoja.size()-1; i++) {
@@ -150,7 +153,7 @@ public class CustomerDAOImplementation implements CustomerDAO{
     @Override
     public String postCustomerUpdate(Customer customerUpdate) {
 
-        String timeStamp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(Calendar.getInstance().getTime());
+        //String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 
         Session currentSession = entityManager.unwrap(Session.class);
         //Customer customer = new Customer();
@@ -168,7 +171,7 @@ Integer numerIdDoUpdate = customerUpdate.getId(); //int na Integer bo tak mam w 
         customer.setPostcode(customerUpdate.getPostcode());
         customer.setTelephoneNumber(customerUpdate.getTelephoneNumber());
         customer.setNip(customerUpdate.getNip());
-        customer.setDateAdded(timeStamp);
+        customer.setDateAdded(customerUpdate.getDateAdded());
         currentSession.beginTransaction();
         //pobranie encji i przypisanie do nowej encji
         //Employee employee = session.get(Employee.class, 9);
