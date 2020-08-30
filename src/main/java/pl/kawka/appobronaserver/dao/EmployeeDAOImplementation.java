@@ -9,6 +9,7 @@ import pl.kawka.appobronaserver.model.Employee;
 
 import javax.persistence.EntityManager;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -108,5 +109,51 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 
 
         return null;
+    }
+
+    @Override
+    public List<Employee> postEmployeeRead(Employee employeeRead) {
+
+        System.out.println("Wchodze do wczytania klientow");
+
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        List<String> listaMoja= new ArrayList<>();
+        if (employeeRead.getId()!=0){
+            listaMoja.add("id='"+employeeRead.getId()+"'");
+        }
+        if (! employeeRead.getFirstName().isEmpty()){
+            listaMoja.add("firstName='"+employeeRead.getFirstName()+"'");
+        }
+        if (! employeeRead.getLastName().equals("")){
+            listaMoja.add("lastName='"+employeeRead.getLastName()+"'");
+        }
+        if (! employeeRead.getStatus().isEmpty()){
+            listaMoja.add("status='"+employeeRead.getStatus()+"'");
+        }
+        if (! employeeRead.getLogin().equals("")){
+            listaMoja.add("login='"+employeeRead.getLogin()+"'");
+        }
+        if (! employeeRead.getPassword().isEmpty()){
+            listaMoja.add("password='"+employeeRead.getPassword()+"'");
+        }
+
+
+        String stringKoncowy="";
+        for (int i = 0; i < listaMoja.size()-1; i++) {
+            stringKoncowy = stringKoncowy + listaMoja.get(i) + " and ";
+        }
+        stringKoncowy = stringKoncowy + listaMoja.get(listaMoja.size()-1);
+
+        System.out.println("Ilosc warunkow: " + listaMoja.size());
+        System.out.println(stringKoncowy);
+
+        Query<Employee> query = currentSession.createQuery("from Employee " + "WHERE " + stringKoncowy, Employee.class);
+        List<Employee> list = query.getResultList();
+
+        System.out.println("Lista klientow do wczytania :" + list);
+        System.out.println("Ilosc na liscie: " + list.size());
+
+        return list;
     }
 }

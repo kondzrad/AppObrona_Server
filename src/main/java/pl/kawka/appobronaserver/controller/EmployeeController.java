@@ -50,5 +50,21 @@ public class EmployeeController {
         return employeeService.postEmployeeCreate(employeeCreate);
     }
 
+    @PostMapping("/read")  //przyjecie json'ow do wczytania clienta
+    public List<Employee> wczytanie(@RequestBody JSONObject requestPara){
+
+        //by nie bylo bledu musi byc konstruktor w CustomerController
+        Employee employeeRead = new Employee(
+                Integer.parseInt(requestPara.get("id").toString()),
+                requestPara.get("firstName").toString(),
+                requestPara.get("lastName").toString(),
+                requestPara.get("status").toString(),
+                requestPara.get("login").toString(),
+                requestPara.get("password").toString());
+        //przypisania danych z JSON do nowego klienta
+        System.out.println(employeeRead);
+
+        return employeeService.postEmployeeRead(employeeRead);
+    }
 
 }

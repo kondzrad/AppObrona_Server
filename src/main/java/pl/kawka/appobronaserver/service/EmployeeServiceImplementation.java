@@ -30,4 +30,9 @@ public class EmployeeServiceImplementation implements EmployeeService {
         return employeeDAO.postEmployeeCreate(employeeCreate);
     }
 
+    @Override
+    public List<Employee> postEmployeeRead(Employee employeeRead) {
+        return employeeDAO.postEmployeeRead(employeeRead);
+    }
+
 }

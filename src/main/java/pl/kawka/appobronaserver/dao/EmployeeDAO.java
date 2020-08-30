@@ -11,4 +11,6 @@ public interface EmployeeDAO {
     String getLogowanie(Employee employee);
 
     String postEmployeeCreate(Employee employeeCreate);
+
+    List<Employee> postEmployeeRead(Employee employeeRead);
 }

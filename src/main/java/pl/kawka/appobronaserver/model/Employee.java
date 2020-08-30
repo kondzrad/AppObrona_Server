@@ -18,7 +18,17 @@ public class Employee {
     }
 
     public Employee(String firstName, String lastName, String status, String login, String password) { //kontruktor
-        // do tworzenia pracownika
+        // do tworzenia pracownika bez id
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.status = status;
+        this.login = login;
+        this.password = password;
+    }
+
+    public Employee(Integer id, String firstName, String lastName, String status, String login, String password) {
+        //pelny kontruktor
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
