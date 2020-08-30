@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EmployeeDAO {
 
-    List<Employee> getPracownikSQL();
+    List<Employee> getAllEmployees();
 
     String getLogowanie(Employee employee);
 }

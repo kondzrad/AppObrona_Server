@@ -16,14 +16,11 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     private EntityManager entityManager;
 
     @Override
-    public List<Employee> getPracownikSQL() {
+    public List<Employee> getAllEmployees() {
         Session currentSession = entityManager.unwrap(Session.class);
         Query<Employee> query = currentSession.createQuery("from Employee", Employee.class);
         List<Employee> list = query.getResultList();
         System.out.println(list);
-
-       /* JSONObject json = new JSONObject();
-        json.put("login", login.getText());*/
 
         return list;
     }

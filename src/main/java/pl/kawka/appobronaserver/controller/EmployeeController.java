@@ -16,15 +16,8 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping //jak wysle jsona z log i haslo to da mi liste pracownikow
-    public List<Employee> getPracownikSQL(@RequestBody JSONObject requestPara){
-
-        //by nie bylo bledu musi byc konstruktor w EmployeeController
-        Employee pracownikSQLaaa = new Employee(requestPara.get("login").toString(),
-                requestPara.get("password").toString());
-        System.out.println(pracownikSQLaaa);
-        System.out.println(requestPara.get("login").toString());
-
-        return employeeService.getPracownikSQL();
+    public List<Employee> getAllEmployees(){
+        return employeeService.getAllEmployees();
     }
 
     @PostMapping("/login")  //przyjecie json'ow do zalogowania
