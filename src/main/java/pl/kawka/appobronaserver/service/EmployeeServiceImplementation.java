@@ -25,4 +25,9 @@ public class EmployeeServiceImplementation implements EmployeeService {
         return employeeDAO.getLogowanie(employeeLogowanie);
     }
 
+    @Override
+    public String postEmployeeCreate(Employee employeeCreate) {
+        return employeeDAO.postEmployeeCreate(employeeCreate);
+    }
+
 }

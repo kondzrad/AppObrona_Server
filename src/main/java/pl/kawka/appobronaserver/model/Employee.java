@@ -17,6 +17,15 @@ public class Employee {
         this.password = password;
     }
 
+    public Employee(String firstName, String lastName, String status, String login, String password) { //kontruktor
+        // do tworzenia pracownika
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.status = status;
+        this.login = login;
+        this.password = password;
+    }
+
     @Column(name = "id_employee")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

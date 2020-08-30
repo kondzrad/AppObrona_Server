@@ -10,4 +10,5 @@ public interface EmployeeService {
 
     String getLogowanie(Employee employeeLogowanie);
 
+    String postEmployeeCreate(Employee employeeCreate);
 }

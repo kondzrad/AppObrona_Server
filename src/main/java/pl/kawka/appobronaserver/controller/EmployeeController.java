@@ -3,6 +3,7 @@ package pl.kawka.appobronaserver.controller;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.kawka.appobronaserver.model.Customer;
 import pl.kawka.appobronaserver.model.Employee;
 import pl.kawka.appobronaserver.service.EmployeeService;
 
@@ -30,6 +31,23 @@ public class EmployeeController {
         System.out.println(requestPara.get("login").toString());
 
         return employeeService.getLogowanie(employeeLogowanie);
+    }
+
+    @PostMapping("/create")  //przyjecie json'ow do stworzenia clienta
+    public String tworzenie(@RequestBody JSONObject requestPara){
+
+        //by nie bylo bledu musi byc konstruktor w CustomerController - bez ID bo nie chcemy wyslac ID
+        Employee employeeCreate = new Employee(
+                //Integer.parseInt(requestPara.get("id").toString()),
+                requestPara.get("firstName").toString(),
+                requestPara.get("lastName").toString(),
+                requestPara.get("status").toString(),
+                requestPara.get("login").toString(),
+                requestPara.get("password").toString());
+        //przypisania danych z JSON do nowego klienta
+        System.out.println("Z controllera" + employeeCreate);
+
+        return employeeService.postEmployeeCreate(employeeCreate);
     }
 
 

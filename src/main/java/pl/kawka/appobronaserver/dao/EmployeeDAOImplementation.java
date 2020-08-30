@@ -4,9 +4,12 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import pl.kawka.appobronaserver.model.Customer;
 import pl.kawka.appobronaserver.model.Employee;
 
 import javax.persistence.EntityManager;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 @Repository
@@ -75,5 +78,35 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 
 
 
+    }
+
+    @Override
+    public String postEmployeeCreate(Employee employeeCreate) {
+
+        System.out.println(employeeCreate);
+
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        //stworzenie obiektu klasy Customer
+        Employee employee = new Employee();
+        //customer.setId(50);  //nie da sie, tylko z automatu mysql se to robi
+        employee.setFirstName(employeeCreate.getFirstName()); //pobranie imienia co przyszlo i wstawienie go do
+        // tabeli
+        employee.setLastName(employeeCreate.getLastName());
+        employee.setStatus(employeeCreate.getStatus());
+        employee.setLogin(employeeCreate.getLogin());
+        employee.setPassword(employeeCreate.getPassword());
+
+        // rozpoczecie transakcji
+        currentSession.beginTransaction();
+        //zapisanie klienta
+        currentSession.save(employee);
+        //zakonczenie transakcji
+        currentSession.getTransaction().commit();
+        //zamkniecie obiektu Session
+        currentSession.close();
+
+
+        return null;
     }
 }

@@ -9,4 +9,6 @@ public interface EmployeeDAO {
     List<Employee> getAllEmployees();
 
     String getLogowanie(Employee employee);
+
+    String postEmployeeCreate(Employee employeeCreate);
 }
