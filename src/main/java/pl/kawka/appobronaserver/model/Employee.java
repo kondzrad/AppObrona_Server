@@ -3,22 +3,16 @@ package pl.kawka.appobronaserver.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "employee_login") //pisac malymi bo jak: daneLogowania to hibernate robi dane_logowania
+@Table(name = "employees") //pisac malymi bo jak: daneLogowania to hibernate robi dane_logowania
 public class Employee {
 
     //pusty kontruktor tez do request
     public Employee() {
-
     }
 
-    //kontruktor do requestParameter
-    public Employee(String login, String password) {
-        this.login = login;
-        this.password = password;
-    }
-
-    public Employee(String firstName, String lastName, String status, String login, String password) { //kontruktor
-        // do tworzenia pracownika bez id
+    //pelny kontruktor
+    public Employee(Integer id, String firstName, String lastName, String status, String login, String password) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
@@ -26,9 +20,14 @@ public class Employee {
         this.password = password;
     }
 
-    public Employee(Integer id, String firstName, String lastName, String status, String login, String password) {
-        //pelny kontruktor
-        this.id = id;
+    //kontruktor do requestParameter do logowania
+    public Employee(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
+    //kontruktor do tworzenia pracownika bez id
+    public Employee(String firstName, String lastName, String status, String login, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;

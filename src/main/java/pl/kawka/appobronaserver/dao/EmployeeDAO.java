@@ -8,7 +8,7 @@ public interface EmployeeDAO {
 
     List<Employee> getAllEmployees();
 
-    String getLogowanie(Employee employee);
+    String getLogin(Employee employee);
 
     String postEmployeeCreate(Employee employeeCreate);
 
@@ -16,5 +16,5 @@ public interface EmployeeDAO {
 
     String postEmployeeUpdate(Employee employeeUpdate);
 
-    List<Employee> postEmployeeDelete(Employee employeeDelete);
+    String postEmployeeDelete(Employee employeeDelete);
 }

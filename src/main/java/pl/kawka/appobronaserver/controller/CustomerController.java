@@ -15,21 +15,15 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    /*@GetMapping("/klienci")  //tez dziala
-    public ResponseEntity<List<Customer>> showLoginPage(){
-        List<Customer> list = customerService.getAllCustomerList();
-        return new ResponseEntity<List<Customer>>(list, HttpStatus.OK);
-    }*/
-
-    @GetMapping //pobiera baze klientow
-    public List<Customer> getAllCustomers(){
+    @GetMapping //pobieranie bazy klientow
+    public List<Customer> getAllCustomers() {
         return customerService.getAllCustomerList();
     }
 
-    @PostMapping("/create")  //przyjecie json'ow do stworzenia clienta
-    public String tworzenie(@RequestBody JSONObject requestPara){
+    @PostMapping("/create")  //przyjecie json'ow do stworzenia klienta
+    public String create(@RequestBody JSONObject requestPara) {
 
-        //by nie bylo bledu musi byc konstruktor w CustomerController - bez ID bo nie chcemy wyslac ID
+        //musi byc konstruktor w CustomerController - bez ID i daty
         Customer customerCreate = new Customer(
                 //Integer.parseInt(requestPara.get("id").toString()),
                 requestPara.get("firstName").toString(),
@@ -39,17 +33,17 @@ public class CustomerController {
                 requestPara.get("postcode").toString(),
                 requestPara.get("telephoneNumber").toString(),
                 requestPara.get("nip").toString());
-                //requestPara.get("dateAdded").toString());
+        //requestPara.get("dateAdded").toString());
         //przypisania danych z JSON do nowego klienta
-        System.out.println("Z controllera" + customerCreate);
+        System.out.println("Z controllera: " + customerCreate);
 
         return customerService.postCustomerCreate(customerCreate);
     }
 
-    @PostMapping("/read")  //przyjecie json'ow do wczytania clienta
-    public List<Customer> wczytanie(@RequestBody JSONObject requestPara){
+    @PostMapping("/read")  //przyjecie json'ow do wczytania klienta
+    public List<Customer> read(@RequestBody JSONObject requestPara) {
 
-        //by nie bylo bledu musi byc konstruktor w CustomerController
+        //musi byc konstruktor w CustomerController
         Customer customerRead = new Customer(
                 Integer.parseInt(requestPara.get("id").toString()),
                 requestPara.get("firstName").toString(),
@@ -61,15 +55,15 @@ public class CustomerController {
                 requestPara.get("nip").toString(),
                 requestPara.get("dateAdded").toString());
         //przypisania danych z JSON do nowego klienta
-        System.out.println(customerRead);
+        System.out.println("Z controllera: " + customerRead);
 
         return customerService.postCustomerRead(customerRead);
     }
 
-    @PostMapping("/update")  //przyjecie json'ow do stworzenia clienta
-    public String modyfikacja(@RequestBody JSONObject requestPara){
+    @PostMapping("/update")  //przyjecie json'ow do stworzenia klienta
+    public String update(@RequestBody JSONObject requestPara) {
 
-        //by nie bylo bledu musi byc konstruktor w CustomerController - bez ID bo nie chcemy wyslac ID
+        //musi byc konstruktor w CustomerController - bez ID
         Customer customerUpdate = new Customer(
                 Integer.parseInt(requestPara.get("id").toString()),
                 requestPara.get("firstName").toString(),
@@ -81,20 +75,20 @@ public class CustomerController {
                 requestPara.get("nip").toString(),
                 requestPara.get("dateAdded").toString());
         //przypisania danych z JSON do nowego klienta
-        System.out.println("Z controllera" + customerUpdate);
+        System.out.println("Z controllera: " + customerUpdate);
 
         return customerService.postCustomerUpdate(customerUpdate);
     }
 
-    @PostMapping("/delete")  //przyjecie json'ow do stworzenia clienta
-    public List<Customer> usuwanie(@RequestBody JSONObject requestPara){
+    @PostMapping("/delete")  //przyjecie json'ow do usuniecia klienta
+    public String delete(@RequestBody JSONObject requestPara) {
 
-        //by nie bylo bledu musi byc konstruktor w CustomerController
+        //musi byc konstruktor w CustomerController
         Customer customerDelete = new Customer(
                 Integer.parseInt(requestPara.get("id").toString())
-                );
+        );
         //przypisania danych z JSON do nowego klienta
-        System.out.println("Controller usuwanie" + customerDelete);
+        System.out.println("Z controllera: " + customerDelete);
 
         return customerService.postCustomerDelete(customerDelete);
     }

@@ -22,7 +22,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
     @Override
     public String getLogowanie(Employee employeeLogowanie) {
-        return employeeDAO.getLogowanie(employeeLogowanie);
+        return employeeDAO.getLogin(employeeLogowanie);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
     }
 
     @Override
-    public List<Employee> postEmployeeDelete(Employee employeeDelete) {
+    public String postEmployeeDelete(Employee employeeDelete) {
         return employeeDAO.postEmployeeDelete(employeeDelete);
     }
 

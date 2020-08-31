@@ -12,70 +12,35 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Repository
-public class CustomerDAOImplementation implements CustomerDAO{
+public class CustomerDAOImplementation implements CustomerDAO {
 
-
-
-   /* @Autowired
-    private SessionFactory sessionFactory;
-
-    @Override
-    public List<Customer> getAllCustomerList() {
-        Session session = sessionFactory.openSession();
-        List<Customer> employeeList = (List<Customer>) session.createQuery("from Customer").list();
-        session.close();
-
-        return employeeList;
-    }*/
-/////////////////////////
     @Autowired
     private EntityManager entityManager;
 
-
-
     @Override
     public List<Customer> getAllCustomerList() {
+
         System.out.println("WCZYTANIE CALEJ BAZY");
         Session currentSession = entityManager.unwrap(Session.class);
         Query<Customer> query = currentSession.createQuery("from Customer", Customer.class);
         List<Customer> list = query.getResultList();
         System.out.println(list);
 
-
-        /*list.replaceAll(s -> s == null ? "x" : s);
-        Collections.replaceAll(list, null, "k");
-        System.out.println(list);*/
-       /* JSONObject json = new JSONObject();
-        json.put("login", login.getText());*/
-
         return list;
     }
-
-
-
 
     @Override
     public String postCustomerCreate(Customer customerCreate) {
 
         System.out.println(customerCreate);
-
         Session currentSession = entityManager.unwrap(Session.class);
-
-        //insert into ... values ... nie dziala w HQL
-        // tak sie nie da bo: In HQL, only the INSERT INTO … SELECT … is supported; there is no INSERT INTO … VALUES. HQL only support insert from another table.
-        //wiec mozna dodac wartosci ale tlyko z innej tabeli
-
-
+        //duze H daje 20 wieczor, a nie 8pm
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-        //duze H daje 20 wieczor a nie 8pm
-
-       // if (customerCreate.getFirstName().equals("")){}else{}
 
         //stworzenie obiektu klasy Customer
         Customer customer = new Customer();
-        //customer.setId(50);  //nie da sie, tylko z automatu mysql se to robi
-        customer.setFirstName(customerCreate.getFirstName()); //pobranie imienia co przyszlo i wstawienie go do
-        // tabeli
+        //customer.setId(50);  //z automatu mysql se to robi
+        customer.setFirstName(customerCreate.getFirstName()); //pobranie imienia co przyszlo i wstawienie go do tabeli
         customer.setLastName(customerCreate.getLastName());
         customer.setTown(customerCreate.getTown());
         customer.setStreet(customerCreate.getStreet());
@@ -83,6 +48,7 @@ public class CustomerDAOImplementation implements CustomerDAO{
         customer.setTelephoneNumber(customerCreate.getTelephoneNumber());
         customer.setNip(customerCreate.getNip());
         customer.setDateAdded(timeStamp);
+
         // rozpoczecie transakcji
         currentSession.beginTransaction();
         //zapisanie klienta
@@ -92,6 +58,10 @@ public class CustomerDAOImplementation implements CustomerDAO{
         //zamkniecie obiektu Session
         currentSession.close();
 
+        //insert into ... values ... nie dziala w HQL
+        // tak sie nie da bo: In HQL, only the INSERT INTO … SELECT … is supported; there is no
+        // INSERT INTO … VALUES. HQL only support insert from another table.
+        //wiec mozna dodac wartosci ale tlyko z innej tabeli
 
         return null;
     }
@@ -100,51 +70,53 @@ public class CustomerDAOImplementation implements CustomerDAO{
     public List<Customer> postCustomerRead(Customer customerRead) {
 
         System.out.println("Wchodze do wczytania klientow");
-
         Session currentSession = entityManager.unwrap(Session.class);
 
-        List<String> listaMoja= new ArrayList<>();
-        if (customerRead.getId()!=0){
-            listaMoja.add("id='"+customerRead.getId()+"'");
+        List<String> listCondition = new ArrayList<>();
+        if (customerRead.getId() != 0) {
+            listCondition.add("id='" + customerRead.getId() + "'");
         }
-        if (! customerRead.getFirstName().isEmpty()){
-            listaMoja.add("firstName='"+customerRead.getFirstName()+"'");
+        if (!customerRead.getFirstName().isEmpty()) {
+            listCondition.add("firstName='" + customerRead.getFirstName() + "'");
         }
-        if (! customerRead.getLastName().equals("")){
-            listaMoja.add("lastName='"+customerRead.getLastName()+"'");
+        if (!customerRead.getLastName().equals("")) {
+            listCondition.add("lastName='" + customerRead.getLastName() + "'");
         }
-        if (! customerRead.getTown().isEmpty()){
-            listaMoja.add("town='"+customerRead.getTown()+"'");
+        if (!customerRead.getTown().isEmpty()) {
+            listCondition.add("town='" + customerRead.getTown() + "'");
         }
-        if (! customerRead.getStreet().equals("")){
-            listaMoja.add("street='"+customerRead.getStreet()+"'");
+        if (!customerRead.getStreet().equals("")) {
+            listCondition.add("street='" + customerRead.getStreet() + "'");
         }
-        if (! customerRead.getPostcode().isEmpty()){
-            listaMoja.add("postcode='"+customerRead.getPostcode()+"'");
+        if (!customerRead.getPostcode().isEmpty()) {
+            listCondition.add("postcode='" + customerRead.getPostcode() + "'");
         }
-        if (! customerRead.getTelephoneNumber().equals("")){
-            listaMoja.add("telephoneNumber='"+customerRead.getTelephoneNumber()+"'");
+        if (!customerRead.getTelephoneNumber().equals("")) {
+            listCondition.add("telephoneNumber='" + customerRead.getTelephoneNumber() + "'");
         }
-        if (! customerRead.getNip().isEmpty()){
-            listaMoja.add("nip='"+customerRead.getNip()+"'");
+        if (!customerRead.getNip().isEmpty()) {
+            listCondition.add("nip='" + customerRead.getNip() + "'");
         }
-        if (! customerRead.getDateAdded().isEmpty()){
-            listaMoja.add("dateAdded='"+customerRead.getDateAdded()+"'");
+        if (!customerRead.getDateAdded().isEmpty()) {
+            listCondition.add("dateAdded='" + customerRead.getDateAdded() + "'");
         }
 
-        String stringKoncowy="";
-        for (int i = 0; i < listaMoja.size()-1; i++) {
-            stringKoncowy = stringKoncowy + listaMoja.get(i) + " and ";
+        String endCondition = "";
+        for (int i = 0; i < listCondition.size() - 1; i++) {
+            endCondition = endCondition + listCondition.get(i) + " and ";
         }
-        stringKoncowy = stringKoncowy + listaMoja.get(listaMoja.size()-1);
 
-        System.out.println("Ilosc warunkow: " + listaMoja.size());
-        System.out.println(stringKoncowy);
+        if (listCondition.size()>0) {
+            endCondition = "WHERE " + endCondition + listCondition.get(listCondition.size() - 1);
+        }
 
-        Query<Customer> query = currentSession.createQuery("from Customer " + "WHERE " + stringKoncowy, Customer.class);
+        System.out.println("Ilosc warunkow: " + listCondition.size());
+        //System.out.println(endCondition);
+
+        Query<Customer> query = currentSession.createQuery("from Customer " + endCondition, Customer.class);
         List<Customer> list = query.getResultList();
 
-        System.out.println("Lista klientow do wczytania :" + list);
+        //System.out.println("Lista klientow do wczytania :" + list);
         System.out.println("Ilosc na liscie: " + list.size());
 
         return list;
@@ -153,16 +125,11 @@ public class CustomerDAOImplementation implements CustomerDAO{
     @Override
     public String postCustomerUpdate(Customer customerUpdate) {
 
-        //String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-
         Session currentSession = entityManager.unwrap(Session.class);
-        //Customer customer = new Customer();
-        System.out.println(customerUpdate.getFirstName());
-       // customer.setId(customerUpdate.getId());
-Integer numerIdDoUpdate = customerUpdate.getId(); //int na Integer bo tak mam w customer
-        System.out.println(numerIdDoUpdate);
+        Integer numberIdToUpdate = customerUpdate.getId(); //int na Integer bo tak mam w Customer
+        //System.out.println(numberIdToUpdate);
 
-        Customer customer = currentSession.get(Customer.class, numerIdDoUpdate);
+        Customer customer = currentSession.get(Customer.class, numberIdToUpdate);
 
         customer.setFirstName(customerUpdate.getFirstName());
         customer.setLastName(customerUpdate.getLastName());
@@ -172,12 +139,9 @@ Integer numerIdDoUpdate = customerUpdate.getId(); //int na Integer bo tak mam w 
         customer.setTelephoneNumber(customerUpdate.getTelephoneNumber());
         customer.setNip(customerUpdate.getNip());
         customer.setDateAdded(customerUpdate.getDateAdded());
+
         currentSession.beginTransaction();
-        //pobranie encji i przypisanie do nowej encji
-        //Employee employee = session.get(Employee.class, 9);
-       // currentSession.update(currentSession.merge(customerUpdate)); //merge musi byc bo: java.lang
         currentSession.update(customer);
-        // .IllegalArgumentException: Removing a detached instance
         currentSession.getTransaction().commit();
         //zamkniecie obiektu SessionFactory
         currentSession.close();
@@ -186,28 +150,20 @@ Integer numerIdDoUpdate = customerUpdate.getId(); //int na Integer bo tak mam w 
 
 
     @Override
-    public List<Customer> postCustomerDelete(Customer customerDelete) {
+    public String postCustomerDelete(Customer customerDelete) {
+
         Session currentSession = entityManager.unwrap(Session.class);
 
         Customer customer = new Customer();
-        System.out.println(customerDelete.getId());
         customer.setId(customerDelete.getId());
+
         currentSession.beginTransaction();
-        //pobranie encji i przypisanie do nowej encji
-        //Employee employee = session.get(Employee.class, 9);
-        currentSession.delete(currentSession.merge(customerDelete)); //merge musi byc bo: java.lang.IllegalArgumentException: Removing a detached instance
+        //merge musi byc bo: java.lang.IllegalArgumentException: Removing a detached instance
+        currentSession.delete(currentSession.merge(customerDelete));
         currentSession.getTransaction().commit();
         //zamkniecie obiektu SessionFactory
         currentSession.close();
-        return null;
-    }
 
-
-
-    private String checkNull(String tekst){
-        if (tekst.equals("")){
-            return "";
-        }
         return null;
     }
 

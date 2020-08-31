@@ -21,6 +21,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 
     @Override
     public List<Employee> getAllEmployees() {
+
         Session currentSession = entityManager.unwrap(Session.class);
         Query<Employee> query = currentSession.createQuery("from Employee", Employee.class);
         List<Employee> list = query.getResultList();
@@ -30,54 +31,34 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     }
 
     @Override
-    public String getLogowanie(Employee employeeLogowanie) {
+    public String getLogin(Employee employeeLogowanie) {
 
         System.out.println(employeeLogowanie);
-        String login1 = employeeLogowanie.getLogin();
-        System.out.println(login1); //odczyt loginu z JSONA co przyszedl
-        String password1 = employeeLogowanie.getPassword();
-        System.out.println(password1); //odczyt hasla z JSONA co przyszedl
-
-        ////////////////////////////////
-        //do analizy
-
-/*
-        Query query = session.createQuery("update User set count = count + :count" +" where id = :Id");
-        query.setParameter("Id", id);
-        query.setParameter("count", count);
-
-*/
-
-        ///////////////////
-
-
         Session currentSession = entityManager.unwrap(Session.class);
+
         Query<Employee> query = currentSession.createQuery("from Employee " +
-                        "WHERE login='"+login1+"' and password='"+password1+"' ",
-                Employee.class);
+                "WHERE login= :login and password= :password ", Employee.class)
+                .setParameter("login", employeeLogowanie.getLogin())
+                .setParameter("password", employeeLogowanie.getPassword());
+
         List<Employee> list = query.getResultList();
         System.out.println("Logowanie lista :" + list);
-
         System.out.println("Status pracownika: " + list.toString().contains("status='pracownik'"));
         System.out.println("Status admina: " + list.toString().contains("status='admin'"));
 
-        if (list.isEmpty()){
+        if (list.isEmpty()) {
             System.out.println("nieudane logowanie");
             return "zle";
-        } else if (list.toString().contains("status='pracownik'")){
+        } else if (list.toString().contains("status='pracownik'")) {
             System.out.println("udane logowanie pracownika");
             return "OKpracownik";
-        }  else if (list.toString().contains("status='admin'")){
-        System.out.println("udane logowanie admina");
-        return "OKadmin";
-        }
-        else{
+        } else if (list.toString().contains("status='admin'")) {
+            System.out.println("udane logowanie admina");
+            return "OKadmin";
+        } else {
             System.out.println("nieudane logowanie2");
             return "zle2";
         }
-
-
-
 
     }
 
@@ -85,14 +66,11 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     public String postEmployeeCreate(Employee employeeCreate) {
 
         System.out.println(employeeCreate);
-
         Session currentSession = entityManager.unwrap(Session.class);
 
-        //stworzenie obiektu klasy Customer
         Employee employee = new Employee();
-        //customer.setId(50);  //nie da sie, tylko z automatu mysql se to robi
-        employee.setFirstName(employeeCreate.getFirstName()); //pobranie imienia co przyszlo i wstawienie go do
-        // tabeli
+        //customer.setId(50);  //z automatu mysql se to robi
+        employee.setFirstName(employeeCreate.getFirstName()); //pobranie imienia i wstawienie do tabeli
         employee.setLastName(employeeCreate.getLastName());
         employee.setStatus(employeeCreate.getStatus());
         employee.setLogin(employeeCreate.getLogin());
@@ -107,7 +85,6 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
         //zamkniecie obiektu Session
         currentSession.close();
 
-
         return null;
     }
 
@@ -115,43 +92,44 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     public List<Employee> postEmployeeRead(Employee employeeRead) {
 
         System.out.println("Wchodze do wczytania klientow");
-
         Session currentSession = entityManager.unwrap(Session.class);
 
-        List<String> listaMoja= new ArrayList<>();
-        if (employeeRead.getId()!=0){
-            listaMoja.add("id='"+employeeRead.getId()+"'");
+        List<String> listCondition = new ArrayList<>();
+        if (employeeRead.getId() != 0) {
+            listCondition.add("id='" + employeeRead.getId() + "'");
         }
-        if (! employeeRead.getFirstName().isEmpty()){
-            listaMoja.add("firstName='"+employeeRead.getFirstName()+"'");
+        if (!employeeRead.getFirstName().isEmpty()) {
+            listCondition.add("firstName='" + employeeRead.getFirstName() + "'");
         }
-        if (! employeeRead.getLastName().equals("")){
-            listaMoja.add("lastName='"+employeeRead.getLastName()+"'");
+        if (!employeeRead.getLastName().equals("")) {
+            listCondition.add("lastName='" + employeeRead.getLastName() + "'");
         }
-        if (! employeeRead.getStatus().isEmpty()){
-            listaMoja.add("status='"+employeeRead.getStatus()+"'");
+        if (!employeeRead.getStatus().isEmpty()) {
+            listCondition.add("status='" + employeeRead.getStatus() + "'");
         }
-        if (! employeeRead.getLogin().equals("")){
-            listaMoja.add("login='"+employeeRead.getLogin()+"'");
+        if (!employeeRead.getLogin().equals("")) {
+            listCondition.add("login='" + employeeRead.getLogin() + "'");
         }
-        if (! employeeRead.getPassword().isEmpty()){
-            listaMoja.add("password='"+employeeRead.getPassword()+"'");
+        if (!employeeRead.getPassword().isEmpty()) {
+            listCondition.add("password='" + employeeRead.getPassword() + "'");
         }
 
-
-        String stringKoncowy="";
-        for (int i = 0; i < listaMoja.size()-1; i++) {
-            stringKoncowy = stringKoncowy + listaMoja.get(i) + " and ";
+        String endCondition = "";
+        for (int i = 0; i < listCondition.size() - 1; i++) {
+            endCondition = endCondition + listCondition.get(i) + " and ";
         }
-        stringKoncowy = stringKoncowy + listaMoja.get(listaMoja.size()-1);
 
-        System.out.println("Ilosc warunkow: " + listaMoja.size());
-        System.out.println(stringKoncowy);
+        if (listCondition.size()>0){
+            endCondition = "WHERE " + endCondition + listCondition.get(listCondition.size() - 1);
+        }
 
-        Query<Employee> query = currentSession.createQuery("from Employee " + "WHERE " + stringKoncowy, Employee.class);
+        System.out.println("Ilosc warunkow: " + listCondition.size());
+        //System.out.println(endCondition);
+
+        Query<Employee> query = currentSession.createQuery("from Employee " + endCondition, Employee.class);
         List<Employee> list = query.getResultList();
 
-        System.out.println("Lista klientow do wczytania :" + list);
+        //System.out.println("Lista klientow do wczytania :" + list);
         System.out.println("Ilosc na liscie: " + list.size());
 
         return list;
@@ -160,14 +138,9 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     @Override
     public String postEmployeeUpdate(Employee employeeUpdate) {
 
-        //String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-
         Session currentSession = entityManager.unwrap(Session.class);
-        //Customer customer = new Customer();
-        System.out.println(employeeUpdate.getFirstName());
-        // customer.setId(customerUpdate.getId());
-        Integer numerIdDoUpdate = employeeUpdate.getId(); //int na Integer bo tak mam w customer
-        System.out.println(numerIdDoUpdate);
+        Integer numerIdDoUpdate = employeeUpdate.getId(); //int na Integer bo tak mam w Employee
+        //System.out.println(numerIdDoUpdate);
 
         Employee employee = currentSession.get(Employee.class, numerIdDoUpdate);
 
@@ -176,12 +149,9 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
         employee.setStatus(employeeUpdate.getStatus());
         employee.setLogin(employeeUpdate.getLogin());
         employee.setPassword(employeeUpdate.getPassword());
+
         currentSession.beginTransaction();
-        //pobranie encji i przypisanie do nowej encji
-        //Employee employee = session.get(Employee.class, 9);
-        // currentSession.update(currentSession.merge(customerUpdate)); //merge musi byc bo: java.lang
         currentSession.update(employee);
-        // .IllegalArgumentException: Removing a detached instance
         currentSession.getTransaction().commit();
         //zamkniecie obiektu SessionFactory
         currentSession.close();
@@ -190,17 +160,16 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     }
 
     @Override
-    public List<Employee> postEmployeeDelete(Employee employeeDelete) {
+    public String postEmployeeDelete(Employee employeeDelete) {
 
         Session currentSession = entityManager.unwrap(Session.class);
 
         Employee employee = new Employee();
-        System.out.println(employeeDelete.getId());
         employee.setId(employeeDelete.getId());
+
         currentSession.beginTransaction();
-        //pobranie encji i przypisanie do nowej encji
-        //Employee employee = session.get(Employee.class, 9);
-        currentSession.delete(currentSession.merge(employeeDelete)); //merge musi byc bo: java.lang.IllegalArgumentException: Removing a detached instance
+        //merge musi byc bo: java.lang.IllegalArgumentException: Removing a detached instance
+        currentSession.delete(currentSession.merge(employeeDelete));
         currentSession.getTransaction().commit();
         //zamkniecie obiektu SessionFactory
         currentSession.close();

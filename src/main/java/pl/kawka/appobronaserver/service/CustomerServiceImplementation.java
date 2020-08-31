@@ -9,7 +9,7 @@ import pl.kawka.appobronaserver.model.Customer;
 import java.util.List;
 
 @Service
-public class CustomerServiceImplementation implements CustomerService{
+public class CustomerServiceImplementation implements CustomerService {
 
     @Autowired
     CustomerDAOImplementation customerDAO;
@@ -30,7 +30,7 @@ public class CustomerServiceImplementation implements CustomerService{
     }
 
     @Override
-    public List<Customer> postCustomerDelete(Customer customerDelete) {
+    public String postCustomerDelete(Customer customerDelete) {
         return customerDAO.postCustomerDelete(customerDelete);
     }
 

@@ -16,15 +16,15 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping //jak wysle jsona z log i haslo to da mi liste pracownikow
-    public List<Employee> getAllEmployees(){
+    @GetMapping //wczytanie wszystkich pracownikow
+    public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 
     @PostMapping("/login")  //przyjecie json'ow do zalogowania
-    public String logowanie(@RequestBody JSONObject requestPara){
+    public String login(@RequestBody JSONObject requestPara) {
 
-        //by nie bylo bledu musi byc konstruktor w EmployeeController
+        //musi byc konstruktor w EmployeeController
         Employee employeeLogowanie = new Employee(requestPara.get("login").toString(),
                 requestPara.get("password").toString()); //przypisania loginu i hasla z JSON do pracownika
         System.out.println(employeeLogowanie);
@@ -33,10 +33,10 @@ public class EmployeeController {
         return employeeService.getLogowanie(employeeLogowanie);
     }
 
-    @PostMapping("/create")  //przyjecie json'ow do stworzenia clienta
-    public String tworzenie(@RequestBody JSONObject requestPara){
+    @PostMapping("/create")  //przyjecie json'ow do stworzenia pracownika
+    public String create(@RequestBody JSONObject requestPara) {
 
-        //by nie bylo bledu musi byc konstruktor w CustomerController - bez ID bo nie chcemy wyslac ID
+        //musi byc konstruktor w EmployeeController - bez ID
         Employee employeeCreate = new Employee(
                 //Integer.parseInt(requestPara.get("id").toString()),
                 requestPara.get("firstName").toString(),
@@ -44,16 +44,16 @@ public class EmployeeController {
                 requestPara.get("status").toString(),
                 requestPara.get("login").toString(),
                 requestPara.get("password").toString());
-        //przypisania danych z JSON do nowego klienta
-        System.out.println("Z controllera" + employeeCreate);
+        //przypisania danych z JSON do nowego pracownika
+        System.out.println("Z controllera: " + employeeCreate);
 
         return employeeService.postEmployeeCreate(employeeCreate);
     }
 
-    @PostMapping("/read")  //przyjecie json'ow do wczytania clienta
-    public List<Employee> wczytanie(@RequestBody JSONObject requestPara){
+    @PostMapping("/read")  //przyjecie json'ow do wczytania pracownika
+    public List<Employee> read(@RequestBody JSONObject requestPara) {
 
-        //by nie bylo bledu musi byc konstruktor w CustomerController
+        //musi byc konstruktor w EmployeeController
         Employee employeeRead = new Employee(
                 Integer.parseInt(requestPara.get("id").toString()),
                 requestPara.get("firstName").toString(),
@@ -61,16 +61,16 @@ public class EmployeeController {
                 requestPara.get("status").toString(),
                 requestPara.get("login").toString(),
                 requestPara.get("password").toString());
-        //przypisania danych z JSON do nowego klienta
-        System.out.println(employeeRead);
+        //przypisania danych z JSON do nowego pracownika
+        System.out.println("Z controllera: " + employeeRead);
 
         return employeeService.postEmployeeRead(employeeRead);
     }
 
-    @PostMapping("/update")  //przyjecie json'ow do stworzenia clienta
-    public String modyfikacja(@RequestBody JSONObject requestPara){
+    @PostMapping("/update")  //przyjecie json'ow do stworzenia pracownika
+    public String update(@RequestBody JSONObject requestPara) {
 
-        //by nie bylo bledu musi byc konstruktor w CustomerController - bez ID bo nie chcemy wyslac ID
+        //musi byc konstruktor w EmployeeController
         Employee employeeUpdate = new Employee(
                 Integer.parseInt(requestPara.get("id").toString()),
                 requestPara.get("firstName").toString(),
@@ -78,21 +78,21 @@ public class EmployeeController {
                 requestPara.get("status").toString(),
                 requestPara.get("login").toString(),
                 requestPara.get("password").toString());
-        //przypisania danych z JSON do nowego klienta
-        System.out.println("Z controllera" + employeeUpdate);
+        //przypisania danych z JSON do nowego pracownika
+        System.out.println("Z controllera: " + employeeUpdate);
 
         return employeeService.postEmployeeUpdate(employeeUpdate);
     }
 
-    @PostMapping("/delete")  //przyjecie json'ow do stworzenia clienta
-    public List<Employee> usuwanie(@RequestBody JSONObject requestPara){
+    @PostMapping("/delete")  //przyjecie json'ow do stworzenia pracownika
+    public String delete(@RequestBody JSONObject requestPara) {
 
-        //by nie bylo bledu musi byc konstruktor w CustomerController
+        //musi byc konstruktor w EmployeeController
         Employee employeeDelete = new Employee(
                 Integer.parseInt(requestPara.get("id").toString())
         );
-        //przypisania danych z JSON do nowego klienta
-        System.out.println("Controller usuwanie" + employeeDelete);
+        //przypisania danych z JSON do nowego pracownika
+        System.out.println("Z controllera: " + employeeDelete);
 
         return employeeService.postEmployeeDelete(employeeDelete);
     }

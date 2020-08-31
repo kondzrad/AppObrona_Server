@@ -8,11 +8,11 @@ public interface CustomerDAO {
 
     String postCustomerCreate(Customer customerCreate);
 
-    public List<Customer> getAllCustomerList();
+    List<Customer> getAllCustomerList();
 
     List<Customer> postCustomerRead(Customer customerRead);
 
-    List<Customer> postCustomerDelete(Customer customerDelete);
+    String postCustomerDelete(Customer customerDelete);
 
     String postCustomerUpdate(Customer customerUpdate);
 }

@@ -16,5 +16,5 @@ public interface EmployeeService {
 
     String postEmployeeUpdate(Employee employeeUpdate);
 
-    List<Employee> postEmployeeDelete(Employee employeeDelete);
+    String postEmployeeDelete(Employee employeeDelete);
 }
