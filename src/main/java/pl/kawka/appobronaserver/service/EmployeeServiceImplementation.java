@@ -35,4 +35,9 @@ public class EmployeeServiceImplementation implements EmployeeService {
         return employeeDAO.postEmployeeRead(employeeRead);
     }
 
+    @Override
+    public String postEmployeeUpdate(Employee employeeUpdate) {
+        return employeeDAO.postEmployeeUpdate(employeeUpdate);
+    }
+
 }

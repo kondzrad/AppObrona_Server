@@ -67,4 +67,21 @@ public class EmployeeController {
         return employeeService.postEmployeeRead(employeeRead);
     }
 
+    @PostMapping("/update")  //przyjecie json'ow do stworzenia clienta
+    public String modyfikacja(@RequestBody JSONObject requestPara){
+
+        //by nie bylo bledu musi byc konstruktor w CustomerController - bez ID bo nie chcemy wyslac ID
+        Employee employeeUpdate = new Employee(
+                Integer.parseInt(requestPara.get("id").toString()),
+                requestPara.get("firstName").toString(),
+                requestPara.get("lastName").toString(),
+                requestPara.get("status").toString(),
+                requestPara.get("login").toString(),
+                requestPara.get("password").toString());
+        //przypisania danych z JSON do nowego klienta
+        System.out.println("Z controllera" + employeeUpdate);
+
+        return employeeService.postEmployeeUpdate(employeeUpdate);
+    }
+
 }

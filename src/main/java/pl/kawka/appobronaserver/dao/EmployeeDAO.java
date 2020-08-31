@@ -13,4 +13,6 @@ public interface EmployeeDAO {
     String postEmployeeCreate(Employee employeeCreate);
 
     List<Employee> postEmployeeRead(Employee employeeRead);
+
+    String postEmployeeUpdate(Employee employeeUpdate);
 }

@@ -156,4 +156,36 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 
         return list;
     }
+
+    @Override
+    public String postEmployeeUpdate(Employee employeeUpdate) {
+
+        //String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+
+        Session currentSession = entityManager.unwrap(Session.class);
+        //Customer customer = new Customer();
+        System.out.println(employeeUpdate.getFirstName());
+        // customer.setId(customerUpdate.getId());
+        Integer numerIdDoUpdate = employeeUpdate.getId(); //int na Integer bo tak mam w customer
+        System.out.println(numerIdDoUpdate);
+
+        Employee employee = currentSession.get(Employee.class, numerIdDoUpdate);
+
+        employee.setFirstName(employeeUpdate.getFirstName());
+        employee.setLastName(employeeUpdate.getLastName());
+        employee.setStatus(employeeUpdate.getStatus());
+        employee.setLogin(employeeUpdate.getLogin());
+        employee.setPassword(employeeUpdate.getPassword());
+        currentSession.beginTransaction();
+        //pobranie encji i przypisanie do nowej encji
+        //Employee employee = session.get(Employee.class, 9);
+        // currentSession.update(currentSession.merge(customerUpdate)); //merge musi byc bo: java.lang
+        currentSession.update(employee);
+        // .IllegalArgumentException: Removing a detached instance
+        currentSession.getTransaction().commit();
+        //zamkniecie obiektu SessionFactory
+        currentSession.close();
+
+        return null;
+    }
 }
