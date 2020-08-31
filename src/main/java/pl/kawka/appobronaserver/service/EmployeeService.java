@@ -15,4 +15,6 @@ public interface EmployeeService {
     List<Employee> postEmployeeRead(Employee employeeRead);
 
     String postEmployeeUpdate(Employee employeeUpdate);
+
+    List<Employee> postEmployeeDelete(Employee employeeDelete);
 }

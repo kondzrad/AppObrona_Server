@@ -36,6 +36,10 @@ public class Employee {
         this.password = password;
     }
 
+    public Employee(Integer id) { //konstruktor do usuwania
+        this.id = id;
+    }
+
     @Column(name = "id_employee")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

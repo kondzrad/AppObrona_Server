@@ -84,4 +84,17 @@ public class EmployeeController {
         return employeeService.postEmployeeUpdate(employeeUpdate);
     }
 
+    @PostMapping("/delete")  //przyjecie json'ow do stworzenia clienta
+    public List<Employee> usuwanie(@RequestBody JSONObject requestPara){
+
+        //by nie bylo bledu musi byc konstruktor w CustomerController
+        Employee employeeDelete = new Employee(
+                Integer.parseInt(requestPara.get("id").toString())
+        );
+        //przypisania danych z JSON do nowego klienta
+        System.out.println("Controller usuwanie" + employeeDelete);
+
+        return employeeService.postEmployeeDelete(employeeDelete);
+    }
+
 }

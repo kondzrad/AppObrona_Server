@@ -188,4 +188,23 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 
         return null;
     }
+
+    @Override
+    public List<Employee> postEmployeeDelete(Employee employeeDelete) {
+
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Employee employee = new Employee();
+        System.out.println(employeeDelete.getId());
+        employee.setId(employeeDelete.getId());
+        currentSession.beginTransaction();
+        //pobranie encji i przypisanie do nowej encji
+        //Employee employee = session.get(Employee.class, 9);
+        currentSession.delete(currentSession.merge(employeeDelete)); //merge musi byc bo: java.lang.IllegalArgumentException: Removing a detached instance
+        currentSession.getTransaction().commit();
+        //zamkniecie obiektu SessionFactory
+        currentSession.close();
+
+        return null;
+    }
 }

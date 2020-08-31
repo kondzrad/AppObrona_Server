@@ -40,4 +40,9 @@ public class EmployeeServiceImplementation implements EmployeeService {
         return employeeDAO.postEmployeeUpdate(employeeUpdate);
     }
 
+    @Override
+    public List<Employee> postEmployeeDelete(Employee employeeDelete) {
+        return employeeDAO.postEmployeeDelete(employeeDelete);
+    }
+
 }
