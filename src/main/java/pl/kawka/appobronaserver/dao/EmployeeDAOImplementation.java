@@ -25,7 +25,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
         Session currentSession = entityManager.unwrap(Session.class);
         Query<Employee> query = currentSession.createQuery("from Employee", Employee.class);
         List<Employee> list = query.getResultList();
-        System.out.println(list);
+        //System.out.println(list);
 
         return list;
     }
@@ -33,7 +33,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     @Override
     public String getLogin(Employee employeeLogowanie) {
 
-        System.out.println(employeeLogowanie);
+        //System.out.println(employeeLogowanie);
         Session currentSession = entityManager.unwrap(Session.class);
 
         Query<Employee> query = currentSession.createQuery("from Employee " +
@@ -42,21 +42,21 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
                 .setParameter("password", employeeLogowanie.getPassword());
 
         List<Employee> list = query.getResultList();
-        System.out.println("Logowanie lista :" + list);
-        System.out.println("Status pracownika: " + list.toString().contains("status='pracownik'"));
-        System.out.println("Status admina: " + list.toString().contains("status='admin'"));
+        //System.out.println("Logowanie lista :" + list);
+        //System.out.println("Status pracownika: " + list.toString().contains("status='pracownik'"));
+        //System.out.println("Status admina: " + list.toString().contains("status='admin'"));
 
         if (list.isEmpty()) {
-            System.out.println("nieudane logowanie");
+            System.out.println("Nieudane logowanie!");
             return "zle";
         } else if (list.toString().contains("status='pracownik'")) {
-            System.out.println("udane logowanie pracownika");
+            System.out.println("Zalogowano pracownika");
             return "OKpracownik";
         } else if (list.toString().contains("status='admin'")) {
-            System.out.println("udane logowanie admina");
+            System.out.println("Zalogowano admina");
             return "OKadmin";
         } else {
-            System.out.println("nieudane logowanie2");
+            System.out.println("Nieudane logowanie");
             return "zle2";
         }
 
@@ -65,7 +65,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     @Override
     public String postEmployeeCreate(Employee employeeCreate) {
 
-        System.out.println(employeeCreate);
+        //System.out.println(employeeCreate);
         Session currentSession = entityManager.unwrap(Session.class);
 
         Employee employee = new Employee();
@@ -91,7 +91,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     @Override
     public List<Employee> postEmployeeRead(Employee employeeRead) {
 
-        System.out.println("Wchodze do wczytania klientow");
+        //System.out.println("Wchodze do wczytania klientow");
         Session currentSession = entityManager.unwrap(Session.class);
 
         List<String> listCondition = new ArrayList<>();
@@ -129,8 +129,8 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
         Query<Employee> query = currentSession.createQuery("from Employee " + endCondition, Employee.class);
         List<Employee> list = query.getResultList();
 
-        //System.out.println("Lista klientow do wczytania :" + list);
-        System.out.println("Ilosc na liscie: " + list.size());
+        //System.out.println("Lista pracownikow do wczytania :" + list);
+        System.out.println("Ilość znalezionych pracownikow: " + list.size());
 
         return list;
     }

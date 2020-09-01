@@ -17,12 +17,14 @@ public class CustomerController {
 
     @GetMapping //pobieranie bazy klientow
     public List<Customer> getAllCustomers() {
+        System.out.println("********** Wczytanie bazy danych klientów **********");
         return customerService.getAllCustomerList();
     }
 
     @PostMapping("/create")  //przyjecie json'ow do stworzenia klienta
     public String create(@RequestBody JSONObject requestPara) {
 
+        System.out.println("********** Tworzenie klienta **********");
         //musi byc konstruktor w CustomerController - bez ID i daty
         Customer customerCreate = new Customer(
                 //Integer.parseInt(requestPara.get("id").toString()),
@@ -35,7 +37,7 @@ public class CustomerController {
                 requestPara.get("nip").toString());
         //requestPara.get("dateAdded").toString());
         //przypisania danych z JSON do nowego klienta
-        System.out.println("Z controllera: " + customerCreate);
+        //System.out.println("Z controllera: " + customerCreate);
 
         return customerService.postCustomerCreate(customerCreate);
     }
@@ -43,6 +45,7 @@ public class CustomerController {
     @PostMapping("/read")  //przyjecie json'ow do wczytania klienta
     public List<Customer> read(@RequestBody JSONObject requestPara) {
 
+        System.out.println("********** Wczytanie klientów **********");
         //musi byc konstruktor w CustomerController
         Customer customerRead = new Customer(
                 Integer.parseInt(requestPara.get("id").toString()),
@@ -55,7 +58,7 @@ public class CustomerController {
                 requestPara.get("nip").toString(),
                 requestPara.get("dateAdded").toString());
         //przypisania danych z JSON do nowego klienta
-        System.out.println("Z controllera: " + customerRead);
+        //System.out.println("Z controllera: " + customerRead);
 
         return customerService.postCustomerRead(customerRead);
     }
@@ -63,6 +66,7 @@ public class CustomerController {
     @PostMapping("/update")  //przyjecie json'ow do stworzenia klienta
     public String update(@RequestBody JSONObject requestPara) {
 
+        System.out.println("********** Modyfikowanie klienta **********");
         //musi byc konstruktor w CustomerController - bez ID
         Customer customerUpdate = new Customer(
                 Integer.parseInt(requestPara.get("id").toString()),
@@ -75,7 +79,7 @@ public class CustomerController {
                 requestPara.get("nip").toString(),
                 requestPara.get("dateAdded").toString());
         //przypisania danych z JSON do nowego klienta
-        System.out.println("Z controllera: " + customerUpdate);
+        //System.out.println("Z controllera: " + customerUpdate);
 
         return customerService.postCustomerUpdate(customerUpdate);
     }
@@ -83,12 +87,13 @@ public class CustomerController {
     @PostMapping("/delete")  //przyjecie json'ow do usuniecia klienta
     public String delete(@RequestBody JSONObject requestPara) {
 
+        System.out.println("********** Usunięcie klienta **********");
         //musi byc konstruktor w CustomerController
         Customer customerDelete = new Customer(
                 Integer.parseInt(requestPara.get("id").toString())
         );
         //przypisania danych z JSON do nowego klienta
-        System.out.println("Z controllera: " + customerDelete);
+        //System.out.println("Z controllera: " + customerDelete);
 
         return customerService.postCustomerDelete(customerDelete);
     }

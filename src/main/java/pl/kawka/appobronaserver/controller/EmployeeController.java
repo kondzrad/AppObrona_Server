@@ -18,17 +18,18 @@ public class EmployeeController {
 
     @GetMapping //wczytanie wszystkich pracownikow
     public List<Employee> getAllEmployees() {
+        System.out.println("********** Wczytanie bazy danych pracowników **********");
         return employeeService.getAllEmployees();
     }
 
     @PostMapping("/login")  //przyjecie json'ow do zalogowania
     public String login(@RequestBody JSONObject requestPara) {
 
+        System.out.println("********** Logowanie **********");
         //musi byc konstruktor w EmployeeController
         Employee employeeLogowanie = new Employee(requestPara.get("login").toString(),
                 requestPara.get("password").toString()); //przypisania loginu i hasla z JSON do pracownika
-        System.out.println(employeeLogowanie);
-        System.out.println(requestPara.get("login").toString());
+        //System.out.println(employeeLogowanie);
 
         return employeeService.getLogowanie(employeeLogowanie);
     }
@@ -36,6 +37,7 @@ public class EmployeeController {
     @PostMapping("/create")  //przyjecie json'ow do stworzenia pracownika
     public String create(@RequestBody JSONObject requestPara) {
 
+        System.out.println("********** Tworzenie pracownika **********");
         //musi byc konstruktor w EmployeeController - bez ID
         Employee employeeCreate = new Employee(
                 //Integer.parseInt(requestPara.get("id").toString()),
@@ -45,7 +47,7 @@ public class EmployeeController {
                 requestPara.get("login").toString(),
                 requestPara.get("password").toString());
         //przypisania danych z JSON do nowego pracownika
-        System.out.println("Z controllera: " + employeeCreate);
+        //System.out.println("Z controllera: " + employeeCreate);
 
         return employeeService.postEmployeeCreate(employeeCreate);
     }
@@ -53,6 +55,7 @@ public class EmployeeController {
     @PostMapping("/read")  //przyjecie json'ow do wczytania pracownika
     public List<Employee> read(@RequestBody JSONObject requestPara) {
 
+        System.out.println("********** Wczytanie pracowników **********");
         //musi byc konstruktor w EmployeeController
         Employee employeeRead = new Employee(
                 Integer.parseInt(requestPara.get("id").toString()),
@@ -62,7 +65,7 @@ public class EmployeeController {
                 requestPara.get("login").toString(),
                 requestPara.get("password").toString());
         //przypisania danych z JSON do nowego pracownika
-        System.out.println("Z controllera: " + employeeRead);
+        //System.out.println("Z controllera: " + employeeRead);
 
         return employeeService.postEmployeeRead(employeeRead);
     }
@@ -70,6 +73,7 @@ public class EmployeeController {
     @PostMapping("/update")  //przyjecie json'ow do stworzenia pracownika
     public String update(@RequestBody JSONObject requestPara) {
 
+        System.out.println("********** Modyfikowanie pracownika **********");
         //musi byc konstruktor w EmployeeController
         Employee employeeUpdate = new Employee(
                 Integer.parseInt(requestPara.get("id").toString()),
@@ -79,7 +83,7 @@ public class EmployeeController {
                 requestPara.get("login").toString(),
                 requestPara.get("password").toString());
         //przypisania danych z JSON do nowego pracownika
-        System.out.println("Z controllera: " + employeeUpdate);
+        //System.out.println("Z controllera: " + employeeUpdate);
 
         return employeeService.postEmployeeUpdate(employeeUpdate);
     }
@@ -87,12 +91,13 @@ public class EmployeeController {
     @PostMapping("/delete")  //przyjecie json'ow do stworzenia pracownika
     public String delete(@RequestBody JSONObject requestPara) {
 
+        System.out.println("********** Usunięcie pracownika **********");
         //musi byc konstruktor w EmployeeController
         Employee employeeDelete = new Employee(
                 Integer.parseInt(requestPara.get("id").toString())
         );
         //przypisania danych z JSON do nowego pracownika
-        System.out.println("Z controllera: " + employeeDelete);
+        //System.out.println("Z controllera: " + employeeDelete);
 
         return employeeService.postEmployeeDelete(employeeDelete);
     }

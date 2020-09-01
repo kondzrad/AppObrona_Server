@@ -20,11 +20,10 @@ public class CustomerDAOImplementation implements CustomerDAO {
     @Override
     public List<Customer> getAllCustomerList() {
 
-        System.out.println("WCZYTANIE CALEJ BAZY");
         Session currentSession = entityManager.unwrap(Session.class);
         Query<Customer> query = currentSession.createQuery("from Customer", Customer.class);
         List<Customer> list = query.getResultList();
-        System.out.println(list);
+        //System.out.println(list);
 
         return list;
     }
@@ -32,7 +31,7 @@ public class CustomerDAOImplementation implements CustomerDAO {
     @Override
     public String postCustomerCreate(Customer customerCreate) {
 
-        System.out.println(customerCreate);
+        //System.out.println(customerCreate);
         Session currentSession = entityManager.unwrap(Session.class);
         //duze H daje 20 wieczor, a nie 8pm
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
@@ -69,7 +68,7 @@ public class CustomerDAOImplementation implements CustomerDAO {
     @Override
     public List<Customer> postCustomerRead(Customer customerRead) {
 
-        System.out.println("Wchodze do wczytania klientow");
+        //System.out.println("Wchodze do wczytania klientow");
         Session currentSession = entityManager.unwrap(Session.class);
 
         List<String> listCondition = new ArrayList<>();
