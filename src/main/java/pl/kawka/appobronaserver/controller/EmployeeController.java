@@ -3,7 +3,6 @@ package pl.kawka.appobronaserver.controller;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.kawka.appobronaserver.model.Customer;
 import pl.kawka.appobronaserver.model.Employee;
 import pl.kawka.appobronaserver.service.EmployeeService;
 

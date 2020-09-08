@@ -72,8 +72,11 @@ public class CustomerDAOImplementation implements CustomerDAO {
         Session currentSession = entityManager.unwrap(Session.class);
 
         List<String> listCondition = new ArrayList<>();
-        if (customerRead.getId() != 0) {
+        if (customerRead.getId() > 0) {
             listCondition.add("id='" + customerRead.getId() + "'");
+        } else if(customerRead.getId() == 0){
+        }else{
+            listCondition.add("id='" + "-1" + "'");
         }
         if (!customerRead.getFirstName().isEmpty()) {
             listCondition.add("firstName='" + customerRead.getFirstName() + "'");

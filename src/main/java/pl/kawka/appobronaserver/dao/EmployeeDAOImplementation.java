@@ -4,13 +4,10 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import pl.kawka.appobronaserver.model.Customer;
 import pl.kawka.appobronaserver.model.Employee;
 
 import javax.persistence.EntityManager;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 @Repository
@@ -49,10 +46,10 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
         if (list.isEmpty()) {
             System.out.println("Nieudane logowanie!");
             return "zle";
-        } else if (list.toString().contains("status='pracownik'")) {
+        } else if (list.toString().contains("status='Pracownik'")) {
             System.out.println("Zalogowano pracownika");
             return "OKpracownik";
-        } else if (list.toString().contains("status='admin'")) {
+        } else if (list.toString().contains("status='Admin'")) {
             System.out.println("Zalogowano admina");
             return "OKadmin";
         } else {
@@ -95,8 +92,11 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
         Session currentSession = entityManager.unwrap(Session.class);
 
         List<String> listCondition = new ArrayList<>();
-        if (employeeRead.getId() != 0) {
+        if (employeeRead.getId() > 0) {
             listCondition.add("id='" + employeeRead.getId() + "'");
+        } else if(employeeRead.getId() == 0){
+        }else {
+            listCondition.add("id='" + "-1" + "'");
         }
         if (!employeeRead.getFirstName().isEmpty()) {
             listCondition.add("firstName='" + employeeRead.getFirstName() + "'");
