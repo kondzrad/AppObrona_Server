@@ -2,7 +2,7 @@ package pl.kawka.appobronaserver.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.kawka.appobronaserver.dao.CustomerDAO;
+import pl.kawka.appobronaserver.dao.CustomerDAOImplementation;
 import pl.kawka.appobronaserver.model.Customer;
 
 import java.util.List;
@@ -11,31 +11,31 @@ import java.util.List;
 public class CustomerServiceImplementation implements CustomerService {
 
     @Autowired
-    private CustomerDAO customerDAO;
+    CustomerDAOImplementation customerDAO;
 
     @Override
-    public List<Customer> restGetAllCustomerList() {
-        return customerDAO.restGetAllCustomerList();
+    public List<Customer> getAllCustomerList() {
+        return customerDAO.getAllCustomerList();
     }
 
     @Override
-    public String restPostCustomerCreate(Customer customerCreate) {
-        return customerDAO.restPostCustomerCreate(customerCreate);
+    public String postCustomerCreate(Customer customerCreate) {
+        return customerDAO.postCustomerCreate(customerCreate);
     }
 
     @Override
-    public List<Customer> restPostCustomerRead(Customer customerRead) {
-        return customerDAO.restPostCustomerRead(customerRead);
+    public List<Customer> postCustomerRead(Customer customerRead) {
+        return customerDAO.postCustomerRead(customerRead);
     }
 
     @Override
-    public String restDeleteCustomerDelete(Customer customerDelete) {
-        return customerDAO.restDeleteCustomerDelete(customerDelete);
+    public String postCustomerDelete(Customer customerDelete) {
+        return customerDAO.postCustomerDelete(customerDelete);
     }
 
     @Override
-    public String restPutCustomerUpdate(Customer customerUpdate) {
-        return customerDAO.restPutCustomerUpdate(customerUpdate);
+    public String postCustomerUpdate(Customer customerUpdate) {
+        return customerDAO.postCustomerUpdate(customerUpdate);
     }
 
 }

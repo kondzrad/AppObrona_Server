@@ -16,33 +16,33 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
     @Transactional
     @Override
-    public List<Employee> restGetAllEmployees() {
-        return employeeDAO.restGetAllEmployees();
+    public List<Employee> getAllEmployees() {
+        return employeeDAO.getAllEmployees();
     }
 
     @Override
-    public String restPostLoginEmployee(Employee employeeLogin) {
-        return employeeDAO.restPostLogin(employeeLogin);
+    public String getLogowanie(Employee employeeLogowanie) {
+        return employeeDAO.getLogin(employeeLogowanie);
     }
 
     @Override
-    public String restPostEmployeeCreate(Employee employeeCreate) {
-        return employeeDAO.restPostEmployeeCreate(employeeCreate);
+    public String postEmployeeCreate(Employee employeeCreate) {
+        return employeeDAO.postEmployeeCreate(employeeCreate);
     }
 
     @Override
-    public List<Employee> restPostEmployeeRead(Employee employeeRead) {
-        return employeeDAO.restPostEmployeeRead(employeeRead);
+    public List<Employee> postEmployeeRead(Employee employeeRead) {
+        return employeeDAO.postEmployeeRead(employeeRead);
     }
 
     @Override
-    public String restPutEmployeeUpdate(Employee employeeUpdate) {
-        return employeeDAO.restPutEmployeeUpdate(employeeUpdate);
+    public String postEmployeeUpdate(Employee employeeUpdate) {
+        return employeeDAO.postEmployeeUpdate(employeeUpdate);
     }
 
     @Override
-    public String restDeleteEmployeeDelete(Employee employeeDelete) {
-        return employeeDAO.restDeleteEmployeeDelete(employeeDelete);
+    public String postEmployeeDelete(Employee employeeDelete) {
+        return employeeDAO.postEmployeeDelete(employeeDelete);
     }
 
 }

@@ -18,7 +18,7 @@ public class CustomerDAOImplementation implements CustomerDAO {
     private EntityManager entityManager;
 
     @Override
-    public List<Customer> restGetAllCustomerList() {
+    public List<Customer> getAllCustomerList() {
 
         Session currentSession = entityManager.unwrap(Session.class);
         Query<Customer> query = currentSession.createQuery("from Customer", Customer.class);
@@ -29,7 +29,7 @@ public class CustomerDAOImplementation implements CustomerDAO {
     }
 
     @Override
-    public String restPostCustomerCreate(Customer customerCreate) {
+    public String postCustomerCreate(Customer customerCreate) {
 
         //System.out.println(customerCreate);
         Session currentSession = entityManager.unwrap(Session.class);
@@ -66,7 +66,7 @@ public class CustomerDAOImplementation implements CustomerDAO {
     }
 
     @Override
-    public List<Customer> restPostCustomerRead(Customer customerRead) {
+    public List<Customer> postCustomerRead(Customer customerRead) {
 
         //System.out.println("Wchodze do wczytania klientow");
         Session currentSession = entityManager.unwrap(Session.class);
@@ -125,7 +125,7 @@ public class CustomerDAOImplementation implements CustomerDAO {
     }
 
     @Override
-    public String restPutCustomerUpdate(Customer customerUpdate) {
+    public String postCustomerUpdate(Customer customerUpdate) {
 
         Session currentSession = entityManager.unwrap(Session.class);
         Integer numberIdToUpdate = customerUpdate.getId(); //int na Integer bo tak mam w Customer
@@ -152,7 +152,7 @@ public class CustomerDAOImplementation implements CustomerDAO {
 
 
     @Override
-    public String restDeleteCustomerDelete(Customer customerDelete) {
+    public String postCustomerDelete(Customer customerDelete) {
 
         Session currentSession = entityManager.unwrap(Session.class);
 

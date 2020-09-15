@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface EmployeeDAO {
 
-    List<Employee> restGetAllEmployees();
+    List<Employee> getAllEmployees();
 
-    String restPostLogin(Employee employee);
+    String getLogin(Employee employee);
 
-    String restPostEmployeeCreate(Employee employeeCreate);
+    String postEmployeeCreate(Employee employeeCreate);
 
-    List<Employee> restPostEmployeeRead(Employee employeeRead);
+    List<Employee> postEmployeeRead(Employee employeeRead);
 
-    String restPutEmployeeUpdate(Employee employeeUpdate);
+    String postEmployeeUpdate(Employee employeeUpdate);
 
-    String restDeleteEmployeeDelete(Employee employeeDelete);
+    String postEmployeeDelete(Employee employeeDelete);
 }
