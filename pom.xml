@@ -11,7 +11,7 @@
 	<groupId>pl.kawka</groupId>
 	<artifactId>AppObronaServerTest3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>AppObronaServerTest3_Spring231_NowaInicjalizacja</name>
+	<name>AppObronaServer</name>
 	<description>Od nowa bez zbednych dependency</description>
 
 	<properties>

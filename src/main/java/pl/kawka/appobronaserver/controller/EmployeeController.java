@@ -16,25 +16,25 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping //wczytanie wszystkich pracownikow
-    public List<Employee> getAllEmployees() {
+    public List<Employee> restGetAllEmployees() {
         System.out.println("********** Wczytanie bazy danych pracowników **********");
-        return employeeService.getAllEmployees();
+        return employeeService.restGetAllEmployees();
     }
 
     @PostMapping("/login")  //przyjecie json'ow do zalogowania
-    public String login(@RequestBody JSONObject requestPara) {
+    public String restLogin(@RequestBody JSONObject requestPara) {
 
         System.out.println("********** Logowanie **********");
         //musi byc konstruktor w EmployeeController
-        Employee employeeLogowanie = new Employee(requestPara.get("login").toString(),
+        Employee employeeLogin = new Employee(requestPara.get("login").toString(),
                 requestPara.get("password").toString()); //przypisania loginu i hasla z JSON do pracownika
-        //System.out.println(employeeLogowanie);
+        //System.out.println(employeeLogin);
 
-        return employeeService.getLogowanie(employeeLogowanie);
+        return employeeService.restPostLoginEmployee(employeeLogin);
     }
 
     @PostMapping("/create")  //przyjecie json'ow do stworzenia pracownika
-    public String create(@RequestBody JSONObject requestPara) {
+    public String restCreate(@RequestBody JSONObject requestPara) {
 
         System.out.println("********** Tworzenie pracownika **********");
         //musi byc konstruktor w EmployeeController - bez ID
@@ -48,11 +48,11 @@ public class EmployeeController {
         //przypisania danych z JSON do nowego pracownika
         //System.out.println("Z controllera: " + employeeCreate);
 
-        return employeeService.postEmployeeCreate(employeeCreate);
+        return employeeService.restPostEmployeeCreate(employeeCreate);
     }
 
     @PostMapping("/read")  //przyjecie json'ow do wczytania pracownika
-    public List<Employee> read(@RequestBody JSONObject requestPara) {
+    public List<Employee> restRead(@RequestBody JSONObject requestPara) {
 
         System.out.println("********** Wczytanie pracowników **********");
         //musi byc konstruktor w EmployeeController
@@ -66,11 +66,11 @@ public class EmployeeController {
         //przypisania danych z JSON do nowego pracownika
         //System.out.println("Z controllera: " + employeeRead);
 
-        return employeeService.postEmployeeRead(employeeRead);
+        return employeeService.restPostEmployeeRead(employeeRead);
     }
 
-    @PostMapping("/update")  //przyjecie json'ow do stworzenia pracownika
-    public String update(@RequestBody JSONObject requestPara) {
+    @PutMapping("/update")  //przyjecie json'ow do modyfikacji pracownika
+    public String restUpdate(@RequestBody JSONObject requestPara) {
 
         System.out.println("********** Modyfikowanie pracownika **********");
         //musi byc konstruktor w EmployeeController
@@ -84,11 +84,11 @@ public class EmployeeController {
         //przypisania danych z JSON do nowego pracownika
         //System.out.println("Z controllera: " + employeeUpdate);
 
-        return employeeService.postEmployeeUpdate(employeeUpdate);
+        return employeeService.restPutEmployeeUpdate(employeeUpdate);
     }
 
-    @PostMapping("/delete")  //przyjecie json'ow do stworzenia pracownika
-    public String delete(@RequestBody JSONObject requestPara) {
+    @DeleteMapping("/delete")  //przyjecie json'ow do usuniecie pracownika
+    public String restDelete(@RequestBody JSONObject requestPara) {
 
         System.out.println("********** Usunięcie pracownika **********");
         //musi byc konstruktor w EmployeeController
@@ -98,7 +98,7 @@ public class EmployeeController {
         //przypisania danych z JSON do nowego pracownika
         //System.out.println("Z controllera: " + employeeDelete);
 
-        return employeeService.postEmployeeDelete(employeeDelete);
+        return employeeService.restDeleteEmployeeDelete(employeeDelete);
     }
 
 }

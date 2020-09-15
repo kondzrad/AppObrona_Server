@@ -17,7 +17,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     private EntityManager entityManager;
 
     @Override
-    public List<Employee> getAllEmployees() {
+    public List<Employee> restGetAllEmployees() {
 
         Session currentSession = entityManager.unwrap(Session.class);
         Query<Employee> query = currentSession.createQuery("from Employee", Employee.class);
@@ -28,7 +28,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     }
 
     @Override
-    public String getLogin(Employee employeeLogowanie) {
+    public String restPostLogin(Employee employeeLogowanie) {
 
         //System.out.println(employeeLogowanie);
         Session currentSession = entityManager.unwrap(Session.class);
@@ -56,11 +56,10 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
             System.out.println("Nieudane logowanie");
             return "zle2";
         }
-
     }
 
     @Override
-    public String postEmployeeCreate(Employee employeeCreate) {
+    public String restPostEmployeeCreate(Employee employeeCreate) {
 
         //System.out.println(employeeCreate);
         Session currentSession = entityManager.unwrap(Session.class);
@@ -86,7 +85,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     }
 
     @Override
-    public List<Employee> postEmployeeRead(Employee employeeRead) {
+    public List<Employee> restPostEmployeeRead(Employee employeeRead) {
 
         //System.out.println("Wchodze do wczytania klientow");
         Session currentSession = entityManager.unwrap(Session.class);
@@ -136,7 +135,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     }
 
     @Override
-    public String postEmployeeUpdate(Employee employeeUpdate) {
+    public String restPutEmployeeUpdate(Employee employeeUpdate) {
 
         Session currentSession = entityManager.unwrap(Session.class);
         Integer numerIdDoUpdate = employeeUpdate.getId(); //int na Integer bo tak mam w Employee
@@ -160,7 +159,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     }
 
     @Override
-    public String postEmployeeDelete(Employee employeeDelete) {
+    public String restDeleteEmployeeDelete(Employee employeeDelete) {
 
         Session currentSession = entityManager.unwrap(Session.class);
 

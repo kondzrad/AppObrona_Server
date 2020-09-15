@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface CustomerDAO {
 
-    String postCustomerCreate(Customer customerCreate);
+    String restPostCustomerCreate(Customer customerCreate);
 
-    List<Customer> getAllCustomerList();
+    List<Customer> restGetAllCustomerList();
 
-    List<Customer> postCustomerRead(Customer customerRead);
+    List<Customer> restPostCustomerRead(Customer customerRead);
 
-    String postCustomerDelete(Customer customerDelete);
+    String restDeleteCustomerDelete(Customer customerDelete);
 
-    String postCustomerUpdate(Customer customerUpdate);
+    String restPutCustomerUpdate(Customer customerUpdate);
 }
