@@ -14,28 +14,28 @@ public class CustomerServiceImplementation implements CustomerService {
     CustomerDAOImplementation customerDAO;
 
     @Override
-    public List<Customer> getAllCustomerList() {
-        return customerDAO.getAllCustomerList();
+    public List<Customer> restGetAllCustomerList() {
+        return customerDAO.restGetAllCustomerList();
     }
 
     @Override
-    public String postCustomerCreate(Customer customerCreate) {
-        return customerDAO.postCustomerCreate(customerCreate);
+    public String restPostCustomerCreate(Customer customerCreate) {
+        return customerDAO.restPostCustomerCreate(customerCreate);
     }
 
     @Override
-    public List<Customer> postCustomerRead(Customer customerRead) {
-        return customerDAO.postCustomerRead(customerRead);
+    public List<Customer> restPostCustomerRead(Customer customerRead) {
+        return customerDAO.restPostCustomerRead(customerRead);
     }
 
     @Override
-    public String postCustomerDelete(Customer customerDelete) {
-        return customerDAO.postCustomerDelete(customerDelete);
+    public String restDeleteCustomerDelete(Customer customerDelete) {
+        return customerDAO.restDeleteCustomerDelete(customerDelete);
     }
 
     @Override
-    public String postCustomerUpdate(Customer customerUpdate) {
-        return customerDAO.postCustomerUpdate(customerUpdate);
+    public String restPutCustomerUpdate(Customer customerUpdate) {
+        return customerDAO.restPutCustomerUpdate(customerUpdate);
     }
 
 }

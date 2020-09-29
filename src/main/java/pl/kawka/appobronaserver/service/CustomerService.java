@@ -6,13 +6,14 @@ import java.util.List;
 
 public interface CustomerService {
 
-    List<Customer> getAllCustomerList();
+    List<Customer> restGetAllCustomerList();
 
-    String postCustomerCreate(Customer customerCreate);
+    String restPostCustomerCreate(Customer customerCreate);
 
-    List<Customer> postCustomerRead(Customer customerRead);
+    List<Customer> restPostCustomerRead(Customer customerRead);
 
-    String postCustomerDelete(Customer customerDelete);
+    String restPutCustomerUpdate(Customer customerUpdate);
 
-    String postCustomerUpdate(Customer customerUpdate);
+    String restDeleteCustomerDelete(Customer customerDelete);
+
 }

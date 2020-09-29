@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> getAllEmployees();
+    List<Employee> restGetAllEmployees();
 
-    String getLogowanie(Employee employeeLogowanie);
+    String restPostLoginEmployee(Employee employeeLogin);
 
-    String postEmployeeCreate(Employee employeeCreate);
+    String restPostEmployeeCreate(Employee employeeCreate);
 
-    List<Employee> postEmployeeRead(Employee employeeRead);
+    List<Employee> restPostEmployeeRead(Employee employeeRead);
 
-    String postEmployeeUpdate(Employee employeeUpdate);
+    String restPutEmployeeUpdate(Employee employeeUpdate);
 
-    String postEmployeeDelete(Employee employeeDelete);
+    String restDeleteEmployeeDelete(Employee employeeDelete);
 }
