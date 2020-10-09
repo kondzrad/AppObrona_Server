@@ -1,10 +1,10 @@
-package pl.kawka.appobronaserver.dao;
+package pl.kawka.graduationworkappserver.dao;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import pl.kawka.appobronaserver.model.Employee;
+import pl.kawka.graduationworkappserver.model.Employee;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;

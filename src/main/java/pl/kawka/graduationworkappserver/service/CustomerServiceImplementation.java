@@ -1,9 +1,9 @@
-package pl.kawka.appobronaserver.service;
+package pl.kawka.graduationworkappserver.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.kawka.appobronaserver.dao.CustomerDAOImplementation;
-import pl.kawka.appobronaserver.model.Customer;
+import pl.kawka.graduationworkappserver.dao.CustomerDAOImplementation;
+import pl.kawka.graduationworkappserver.model.Customer;
 
 import java.util.List;
 

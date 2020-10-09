@@ -1,19 +1,18 @@
-package pl.kawka.appobronaserver.service;
+package pl.kawka.graduationworkappserver.dao;
 
-import pl.kawka.appobronaserver.model.Customer;
+import pl.kawka.graduationworkappserver.model.Customer;
 
 import java.util.List;
 
-public interface CustomerService {
-
-    List<Customer> restGetAllCustomerList();
+public interface CustomerDAO {
 
     String restPostCustomerCreate(Customer customerCreate);
+
+    List<Customer> restGetAllCustomerList();
 
     List<Customer> restPostCustomerRead(Customer customerRead);
 
     String restPutCustomerUpdate(Customer customerUpdate);
 
     String restDeleteCustomerDelete(Customer customerDelete);
-
 }

@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>pl.kawka</groupId>
-	<artifactId>AppObronaServerTest3</artifactId>
+	<artifactId>GraduationWorkAppServer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>AppObronaServer</name>
-	<description>Wersja na obrone</description>
+	<name>GraduationWorkAppServer</name>
+	<description>Spring JavaFX REST</description>
 
 	<properties>
 		<java.version>1.8</java.version>

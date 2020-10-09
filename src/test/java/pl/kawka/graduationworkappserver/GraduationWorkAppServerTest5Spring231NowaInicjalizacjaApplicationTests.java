@@ -1,10 +1,10 @@
-package pl.kawka.appobronaserver;
+package pl.kawka.graduationworkappserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AppObronaServerTest5Spring231NowaInicjalizacjaApplicationTests {
+class GraduationWorkAppServerTest5Spring231NowaInicjalizacjaApplicationTests {
 
 	@Test
 	void contextLoads() {

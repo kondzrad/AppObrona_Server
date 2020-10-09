@@ -1,14 +1,14 @@
-package pl.kawka.appobronaserver.service;
+package pl.kawka.graduationworkappserver.dao;
 
-import pl.kawka.appobronaserver.model.Employee;
+import pl.kawka.graduationworkappserver.model.Employee;
 
 import java.util.List;
 
-public interface EmployeeService {
+public interface EmployeeDAO {
 
     List<Employee> restGetAllEmployees();
 
-    String restPostLoginEmployee(Employee employeeLogin);
+    String restPostLogin(Employee employee);
 
     String restPostEmployeeCreate(Employee employeeCreate);
 

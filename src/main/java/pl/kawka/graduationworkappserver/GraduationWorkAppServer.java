@@ -1,13 +1,13 @@
-package pl.kawka.appobronaserver;
+package pl.kawka.graduationworkappserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AppObronaServer {
+public class GraduationWorkAppServer {
 
     public static void main(String[] args) {
-        SpringApplication.run(AppObronaServer.class, args);
+        SpringApplication.run(GraduationWorkAppServer.class, args);
     }
 
 }

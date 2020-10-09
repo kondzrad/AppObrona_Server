@@ -1,10 +1,10 @@
-package pl.kawka.appobronaserver.controller;
+package pl.kawka.graduationworkappserver.controller;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.kawka.appobronaserver.model.Employee;
-import pl.kawka.appobronaserver.service.EmployeeService;
+import pl.kawka.graduationworkappserver.model.Employee;
+import pl.kawka.graduationworkappserver.service.EmployeeService;
 
 import java.util.List;
 

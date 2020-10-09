@@ -1,4 +1,4 @@
-package pl.kawka.appobronaserver.model;
+package pl.kawka.graduationworkappserver.model;
 
 import javax.persistence.*;
 
